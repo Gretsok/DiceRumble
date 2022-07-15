@@ -27,6 +27,14 @@ namespace DR.Gameplay.Level.Grid
         [SerializeField, HideInInspector]
         private List<TileColumn> m_tiles = new List<TileColumn>();
 
+        [SerializeField]
+        private List<Vector2Int> m_firstTeamSpawnPositions = null;
+        [SerializeField]
+        private List<Vector2Int> m_secondTeamSpawnPositions = null;
+
+        public List<Vector2Int> FirstTeamSpawnPositions => m_firstTeamSpawnPositions;
+        public List<Vector2Int> SecondteamSpawnPositions => m_secondTeamSpawnPositions;
+
         public void GenerateLevel()
         {
 #if UNITY_EDITOR
