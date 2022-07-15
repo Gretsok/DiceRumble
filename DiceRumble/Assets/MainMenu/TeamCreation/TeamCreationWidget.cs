@@ -7,6 +7,7 @@ namespace DR.MainMenu.TeamCreation
     {
         [SerializeField]
         private List<TeamMemberSelectionWidget> m_teamMembreSelectionWidgets = null;
+        public List<TeamMemberSelectionWidget> TeamMemberSelectionWidgets => m_teamMembreSelectionWidgets;
 
         private UnityEngine.Events.UnityAction<TeamCreationWidget, int> OnUpArrowClicked = null;
         private UnityEngine.Events.UnityAction<TeamCreationWidget, int> OnDownArrowClicked = null;
