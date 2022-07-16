@@ -320,6 +320,7 @@ MonoBehaviour:
   m_panels:
   - {fileID: 4824563957916111599}
   m_gamemode: {fileID: 72915026}
+  m_gameLevelData: {fileID: 11400000, guid: 1f47afa59a852fc41997a2a9beb2f93d, type: 2}
   m_availableDicesData: {fileID: 11400000, guid: 5626c3ce3291721479121142cf94eff8,
     type: 2}
 --- !u!1 &1543599464

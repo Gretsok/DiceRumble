@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a385779f1a1bb141ac1b2c75db52054, type: 3}
   m_Name: Level_01LevelData
   m_EditorClassIdentifier: 
-  m_dataID: 0
+  m_dataID: 1011910909
   m_mainScene:
     m_SceneAsset: {fileID: 102900000, guid: 84fbdab3f7a9c014caccd08b0c0b03c4, type: 3}
     m_SceneName: Gameplay_Logic

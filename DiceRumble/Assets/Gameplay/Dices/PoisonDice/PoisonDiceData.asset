@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_diceName: Poison Dice
   m_dicePreviewIcon: {fileID: 21300000, guid: 701bc094f787dd547a1e4110dd597fc4, type: 3}
+  m_dicePrefab: {fileID: 5181374341784936104, guid: a03cc2a000119764db3d5e6d16857e74,
+    type: 3}

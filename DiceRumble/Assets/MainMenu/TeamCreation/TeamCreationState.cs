@@ -1,3 +1,4 @@
+using MOtter.LevelData;
 using MOtter.StatesMachine;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,9 @@ namespace DR.MainMenu.TeamCreation
         }
         [SerializeField]
         private MainMenuGameMode m_gamemode = null;
+        [SerializeField]
+        private LevelData m_gameLevelData = null;
+        private bool m_hasLaunchedTheGame = false;
 
         private TeamCreationPanel m_panel = null;
 
@@ -20,6 +24,8 @@ namespace DR.MainMenu.TeamCreation
         private AvailableDicesData m_availableDicesData = null;
 
         private List<TeamChoices> m_teamChoices = new List<TeamChoices>();
+
+
 
         internal override void RegisterReferences()
         {
@@ -58,7 +64,24 @@ namespace DR.MainMenu.TeamCreation
 
         private void HandleStartGameButtonClicked()
         {
-            Debug.Log("Starting game");
+            if (m_hasLaunchedTheGame) return;
+            // Debug.Log("Starting game");
+
+            Gameplay.Teams.TeamsDataConveyor teamsDataConveyor = new Gameplay.Teams.TeamsDataConveyor();
+            teamsDataConveyor.FirstTeamDicesData = new List<Gameplay.Dices.DiceData>();
+            for(int i = 0; i < m_teamChoices[0].MemberIndexes.Count; ++i)
+            {
+                teamsDataConveyor.FirstTeamDicesData.Add(m_availableDicesData.AvailableDicesList[m_teamChoices[0].MemberIndexes[i]]);
+            }
+            teamsDataConveyor.SecondTeamDicesData = new List<Gameplay.Dices.DiceData>();
+            for(int i = 0; i < m_teamChoices[1].MemberIndexes.Count; ++i)
+            {
+                teamsDataConveyor.SecondTeamDicesData.Add(m_availableDicesData.AvailableDicesList[m_teamChoices[1].MemberIndexes[i]]);
+            }
+            MOtter.MOtt.DATACONVEY.RegisterContainer(teamsDataConveyor);
+
+            m_gameLevelData.LoadLevel();
+            m_hasLaunchedTheGame = true;
         }
 
         internal override void UnregisterEvents()
@@ -74,7 +97,7 @@ namespace DR.MainMenu.TeamCreation
         {
             if(arg0 == m_panel.FirstTeamCreationWidget)
             {
-                Debug.Log($"Press down arrow of member {arg1 + 1} of first team");
+                // Debug.Log($"Press down arrow of member {arg1 + 1} of first team");
                 m_teamChoices[0].MemberIndexes[arg1]--;
                 if(m_teamChoices[0].MemberIndexes[arg1] < 0)
                 {
@@ -83,7 +106,7 @@ namespace DR.MainMenu.TeamCreation
             }
             else if(arg0 == m_panel.SecondTeamCreationWidget)
             {
-                Debug.Log($"Press down arrow of member {arg1 + 1} of second team");
+                // Debug.Log($"Press down arrow of member {arg1 + 1} of second team");
                 m_teamChoices[1].MemberIndexes[arg1]--;
                 if (m_teamChoices[1].MemberIndexes[arg1] < 0)
                 {
@@ -97,13 +120,13 @@ namespace DR.MainMenu.TeamCreation
         {
             if (arg0 == m_panel.FirstTeamCreationWidget)
             {
-                Debug.Log($"Press up arrow of member {arg1 + 1} of first team");
+                // Debug.Log($"Press up arrow of member {arg1 + 1} of first team");
                 m_teamChoices[0].MemberIndexes[arg1]++;
                 m_teamChoices[0].MemberIndexes[arg1] = m_teamChoices[0].MemberIndexes[arg1] % m_availableDicesData.AvailableDicesList.Count;
             }
             else if (arg0 == m_panel.SecondTeamCreationWidget)
             {
-                Debug.Log($"Press up arrow of member {arg1 + 1} of second team");
+                // Debug.Log($"Press up arrow of member {arg1 + 1} of second team");
                 m_teamChoices[1].MemberIndexes[arg1]++;
                 m_teamChoices[1].MemberIndexes[arg1] = m_teamChoices[1].MemberIndexes[arg1] % m_availableDicesData.AvailableDicesList.Count;
             }
