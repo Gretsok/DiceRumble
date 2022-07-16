@@ -27,11 +27,11 @@ namespace DR.Gameplay.Level.Flow.EndState
             base.SetUpDependencies();
             if(m_gamemode.DicesManager.FirstTeamDices.Count == 0)
             {
-                m_panel.InflateWinningTeam(0);
+                m_panel.InflateWinningTeam(1);
             }
             else
             {
-                m_panel.InflateWinningTeam(1);
+                m_panel.InflateWinningTeam(0);
             }
             m_hasStartedLoadingMenu = false;
         }
