@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DR.Gameplay.Combat;
 using UnityEngine;
 
@@ -26,6 +27,9 @@ namespace DR.Gameplay.Dices
         private CombatController m_combatController;
         public CombatController CombatController => m_combatController;
 
+        [SerializeField]
+        private List<Renderer> m_armsRenderer = null;
+
         private int m_teamIndex;
         public int TeamIndex => m_teamIndex;
 
@@ -45,6 +49,11 @@ namespace DR.Gameplay.Dices
         {
             m_combatController.ResetUsedPowers();
             m_diceMovementController.RemoveRootStack();
+        }
+
+        public void InflateArmsColors(Color a_armsColor)
+        {
+            m_armsRenderer.ForEach(x => x.material.color = a_armsColor);
         }
     }
 }

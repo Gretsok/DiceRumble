@@ -45,7 +45,11 @@ namespace DR.MainMenu.TeamCreation
         internal override void SetUpDependencies()
         {
             base.SetUpDependencies();
-            while(m_teamChoices.Count < 2)
+
+            m_panel.FirstTeamCreationWidget.InflateBannerColor((MOtter.MOtt.GM as DRGameManager).GlobalGameData.FirstTeamData.TeamColor);
+            m_panel.SecondTeamCreationWidget.InflateBannerColor((MOtter.MOtt.GM as DRGameManager).GlobalGameData.SecondTeamData.TeamColor);
+
+            while (m_teamChoices.Count < 2)
             {
                 TeamChoices teamChoices;
                 teamChoices.MemberIndexes = new List<int>();

@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41aa227c6e558de449145a04c9881511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_gameManager: {fileID: 7108454201724914709}
+  m_gameManager: {fileID: 8157019257052176429}
   m_localizationManager: {fileID: 0}
   m_soundManager: {fileID: 0}
   m_playerProfileManager: {fileID: 7108454202556152532}
@@ -140,7 +140,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7108454201724914708}
-  - component: {fileID: 7108454201724914709}
+  - component: {fileID: 8157019257052176429}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -163,7 +163,7 @@ Transform:
   m_Father: {fileID: 7108454201593117177}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7108454201724914709
+--- !u!114 &8157019257052176429
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,9 +172,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7108454201724914707}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d577e9919336cf4b992fdb73c3643ee, type: 3}
+  m_Script: {fileID: 11500000, guid: 28742449938839043afff189137ae301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_globalGameData: {fileID: 11400000, guid: b8a9f9d3092eecf49b32a55dbb9ced30, type: 2}
 --- !u!1 &7108454202556152529
 GameObject:
   m_ObjectHideFlags: 0

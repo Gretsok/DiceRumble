@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace DR.MainMenu.TeamCreation
 {
@@ -11,6 +12,14 @@ namespace DR.MainMenu.TeamCreation
 
         private UnityEngine.Events.UnityAction<TeamCreationWidget, int> OnUpArrowClicked = null;
         private UnityEngine.Events.UnityAction<TeamCreationWidget, int> OnDownArrowClicked = null;
+
+        [SerializeField]
+        private Image m_banner = null;
+
+        public void InflateBannerColor(Color a_bannerColor)
+        {
+            m_banner.color = a_bannerColor;
+        }
 
         public void RegisterArrowsCallback(UnityEngine.Events.UnityAction<TeamCreationWidget, int> a_upArrowClicked,
             UnityEngine.Events.UnityAction<TeamCreationWidget, int> a_downArrowClicked)

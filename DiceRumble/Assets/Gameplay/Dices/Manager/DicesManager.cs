@@ -15,6 +15,7 @@ namespace DR.Gameplay.Dices.Manager
             for (int i = 0; i < a_teamsDataConveyor.FirstTeamDicesData.Count; ++i)
             {
                 var newDice = Instantiate(a_teamsDataConveyor.FirstTeamDicesData[i].DicePrefab, a_grid.transform);
+                newDice.InflateArmsColors((MOtter.MOtt.GM as DRGameManager).GlobalGameData.FirstTeamData.TeamColor);
                 var spawnTile = a_grid.TryToGetTile(a_grid.FirstTeamSpawnPositions[i]);
                 spawnTile.TryToSetCurrentDice(newDice);
                 newDice.GetComponent<DiceMovementController>().GamePosition = a_grid.FirstTeamSpawnPositions[i];
@@ -27,6 +28,7 @@ namespace DR.Gameplay.Dices.Manager
             for (int i = 0; i < a_teamsDataConveyor.SecondTeamDicesData.Count; ++i)
             {
                 var newDice = Instantiate(a_teamsDataConveyor.SecondTeamDicesData[i].DicePrefab, a_grid.transform);
+                newDice.InflateArmsColors((MOtter.MOtt.GM as DRGameManager).GlobalGameData.SecondTeamData.TeamColor);
                 var spawnTile = a_grid.TryToGetTile(a_grid.SecondteamSpawnPositions[i]);
                 spawnTile.TryToSetCurrentDice(newDice);
                 newDice.GetComponent<DiceMovementController>().GamePosition = a_grid.SecondteamSpawnPositions[i];
