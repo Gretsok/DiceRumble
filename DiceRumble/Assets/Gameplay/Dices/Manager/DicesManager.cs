@@ -18,7 +18,7 @@ namespace DR.Gameplay.Dices.Manager
                 var spawnTile = a_grid.TryToGetTile(a_grid.FirstTeamSpawnPositions[i]);
                 newDice.transform.position = spawnTile.transform.position;
                 newDice.transform.rotation = spawnTile.transform.rotation;
-                newDice.Init(a_teamsDataConveyor.FirstTeamDicesData[i].DiceHealth);
+                newDice.Init(a_teamsDataConveyor.FirstTeamDicesData[i].DiceHealth, 0);
                 m_firstTeamDices.Add(newDice);
             }
 
@@ -28,7 +28,7 @@ namespace DR.Gameplay.Dices.Manager
                 var spawnTile = a_grid.TryToGetTile(a_grid.SecondteamSpawnPositions[i]);
                 newDice.transform.position = spawnTile.transform.position;
                 newDice.transform.rotation = spawnTile.transform.rotation;
-                newDice.Init(a_teamsDataConveyor.SecondTeamDicesData[i].DiceHealth);
+                newDice.Init(a_teamsDataConveyor.SecondTeamDicesData[i].DiceHealth, 1);
                 m_secondTeamDices.Add(newDice);
             }
         }

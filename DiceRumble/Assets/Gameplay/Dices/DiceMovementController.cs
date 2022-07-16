@@ -34,6 +34,9 @@ namespace DR.Gameplay.Dices
         private LayerMask m_facesLayerMask = default;
         private bool m_canRoll = true;
 
+        private int m_rootStacks;
+        public int RootStacks => m_rootStacks;
+
         private void Start()
         {
             m_animationsHandler.OnRollFinished += HandleRollFinished;
@@ -96,5 +99,15 @@ namespace DR.Gameplay.Dices
             m_animationsHandler.TriggerRollRightwardAnimations();
         }
 
+        public void RemoveRootStack()
+        {
+            if(m_rootStacks > 0)
+                m_rootStacks--;
+        }
+
+        public void ApplyRoot(int p_stacks)
+        {
+            m_rootStacks = p_stacks;
+        }
     }
 }

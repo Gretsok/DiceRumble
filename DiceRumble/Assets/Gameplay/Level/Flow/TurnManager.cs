@@ -23,5 +23,10 @@ namespace DR.Gameplay.Level.Flow
         {
             m_teamTurn = p_teamIndex;
         }
+
+        public void ChangeTurn()
+        {
+            m_teamTurn = 1 - m_teamTurn;
+        }
     }
 }

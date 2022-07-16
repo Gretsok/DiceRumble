@@ -14,6 +14,10 @@ namespace DR.Gameplay.Level.Flow
         private Gameplay.Level.Flow.TurnManager m_turnManager = null;
         public Gameplay.Level.Flow.TurnManager TurnManager => m_turnManager;
 
+        [SerializeField] 
+        private Gameplay.Data.GameplayData m_gameplayData = null;
+        public Gameplay.Data.GameplayData GameplayData => m_gameplayData;
+
         private Grid.Grid m_grid = null;
         private Teams.TeamsDataConveyor m_teamsDataConveyor = null;
 
