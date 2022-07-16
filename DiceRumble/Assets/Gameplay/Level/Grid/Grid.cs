@@ -80,5 +80,23 @@ namespace DR.Gameplay.Level.Grid
             return m_tiles[a_gamePosition.x].Tiles[a_gamePosition.y];
         }
 
+
+        public List<Tile> GetSurroundingTiles(Vector2Int a_gamePosition)
+        {
+            List<Tile> tiles = new List<Tile>();
+            Tile tile = TryToGetTile(a_gamePosition + new Vector2Int(0, 1));
+            if (tile != null)
+                tiles.Add(tile);
+            tile = TryToGetTile(a_gamePosition + new Vector2Int(0, -1));
+            if (tile != null)
+                tiles.Add(tile);
+            tile = TryToGetTile(a_gamePosition + new Vector2Int(1, 0));
+            if (tile != null)
+                tiles.Add(tile);
+            tile = TryToGetTile(a_gamePosition + new Vector2Int(-1, 0));
+            if (tile != null)
+                tiles.Add(tile);
+            return tiles;
+        }
     }
 }
