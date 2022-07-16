@@ -122,6 +122,10 @@ namespace DR.Gameplay.Combat
         public void Die()
         {
             Debug.Log("ME DEAD!");
+            var moveController = GetComponent<DiceMovementController>();
+            moveController.ChangeTile(moveController, null);
+            MOtt.GM.GetCurrentMainStateMachine<LevelGameMode>().DicesManager.HandleDiceDeath(GetComponent<Dice>());
+            Destroy(gameObject);
         }
 
         private void ApplyCombatEffects(CombatController p_target)

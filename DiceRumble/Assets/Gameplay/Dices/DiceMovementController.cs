@@ -36,6 +36,11 @@ namespace DR.Gameplay.Dices
         private Transform m_model = null;
         [SerializeField]
         private LayerMask m_facesLayerMask = default;
+
+        [SerializeField]
+        private Animations.Extras.Rotation.DiceExtrasRotationBrain m_extrasRotationBrain = null;
+        public Animations.Extras.Rotation.DiceExtrasRotationBrain ExtrasRotationBrain => m_extrasRotationBrain;
+
         private bool m_canRoll = true;
 
         private int m_rootStacks;
@@ -95,6 +100,7 @@ namespace DR.Gameplay.Dices
             GamePosition += Vector2Int.down;
             m_animationsHandler.TriggerRollForwardAnimations();
             InformStateAboutMovingDice(true);
+            m_extrasRotationBrain.LookForward();
         }
 
         public void RollBackward()
@@ -104,6 +110,7 @@ namespace DR.Gameplay.Dices
             GamePosition += Vector2Int.up;
             m_animationsHandler.TriggerRollBackwardAnimations();
             InformStateAboutMovingDice(true);
+            m_extrasRotationBrain.LookBackward();
         }
 
         public void RollLeftward()
@@ -113,6 +120,7 @@ namespace DR.Gameplay.Dices
             GamePosition += Vector2Int.left;
             m_animationsHandler.TriggerRollLeftwardAnimations();
             InformStateAboutMovingDice(true);
+            m_extrasRotationBrain.LookLeftward();
         }
 
         public void RollRightward()
@@ -122,14 +130,15 @@ namespace DR.Gameplay.Dices
             GamePosition += Vector2Int.right;
             m_animationsHandler.TriggerRollRightwardAnimations();
             InformStateAboutMovingDice(true);
+            m_extrasRotationBrain.LookRightward();
         }
 
         private void InformStateAboutMovingDice(bool p_moving)
         {
             StateMonoBehaviour state = MOtt.GM.GetCurrentMainStateMachine<LevelGameMode>().GetCurrentState();
-            if (state && state.GetType() == typeof(TurnState))
+            if (state && state.GetType() == typeof(Level.Flow.TurnState.TurnState))
             {
-                ((TurnState)state).SetDiceIsMoving(p_moving);
+                ((Level.Flow.TurnState.TurnState)state).SetDiceIsMoving(p_moving);
             }        
         }
 

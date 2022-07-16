@@ -2,7 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-namespace DR.Gameplay.Level.Flow
+namespace DR.Gameplay.Level.Flow.TurnState
 {
     public class TurnPanel : Panel
     {

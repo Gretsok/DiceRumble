@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
 using DR.Gameplay.Dices;
@@ -7,77 +8,82 @@ using DR.Gameplay.Level.Grid;
 using MOtter.StatesMachine;
 using UnityEngine;
 
-public class FightState : FlowState
+namespace DR.Gameplay.Level.Flow.FightState
 {
-    [SerializeField]
-    private LevelGameMode m_gamemode = null;
-    private bool m_hasFinishedFighting = false;
-    private bool m_askedForNextState = false;
-    public override void EnterState()
+    public class FightState : FlowState
     {
-        base.EnterState();
-        Debug.Log("EnterState : " + gameObject.name);
-        m_askedForNextState = false;
-        m_hasFinishedFighting = false;
-        Fight();
-    }
-
-    public override void UpdateState()
-    {
-        base.UpdateState();
-        if(m_hasFinishedFighting && !m_askedForNextState)
+        [SerializeField]
+        private LevelGameMode m_gamemode = null;
+        private bool m_hasFinishedFighting = false;
+        private bool m_askedForNextState = false;
+        public override void EnterState()
         {
-            m_gamemode.SwitchToNextState();
-            m_askedForNextState = true;
+            base.EnterState();
+            Debug.Log("EnterState : " + gameObject.name);
+            m_askedForNextState = false;
+            m_hasFinishedFighting = false;
+            StartCoroutine(Fight());
         }
-    }
 
-    public override void ExitState()
-    {
-        base.ExitState();
-        DicesManager dm = m_gamemode.DicesManager;
-        TurnManager turnManager = m_gamemode.TurnManager;
-        int turnTeam = turnManager.TurnTeam;
-        List<Dice> teamDices = turnTeam == 0 ? dm.FirstTeamDices : dm.SecondTeamDices;
-        foreach (Dice dice in teamDices)
+        public override void UpdateState()
         {
-            dice.EndTurnUpdates();
-        }
-        turnManager.ChangeTurn();
-        Debug.Log("ExitState : " + gameObject.name);
-    }
-
-    private void Fight()
-    {
-        //Fight dices
-        List<Dice> teamDices = m_gamemode.TurnManager.TurnTeam == 0 ? m_gamemode.DicesManager.FirstTeamDices : m_gamemode.DicesManager.SecondTeamDices;
-        List<Dice> opponentDices = m_gamemode.TurnManager.TurnTeam == 1 ? m_gamemode.DicesManager.FirstTeamDices : m_gamemode.DicesManager.SecondTeamDices;
-        foreach (Dice dice in teamDices)
-        {
-            List<Tile> surroundingTiles = m_gamemode.Grid.GetSurroundingTiles(dice.DiceMovementController.GamePosition);
-            foreach (Tile tile in surroundingTiles)
+            base.UpdateState();
+            if (m_hasFinishedFighting && !m_askedForNextState)
             {
-                if (tile.CurrentDice is not null && tile.CurrentDice.TeamIndex != dice.TeamIndex)
-                {
-                    Debug.Log(dice.gameObject.name + " attacks " + tile.CurrentDice.gameObject.name);
-                    dice.CombatController.Attack(tile.CurrentDice.CombatController);
-                }
+                m_gamemode.SwitchToNextState();
+                m_askedForNextState = true;
             }
         }
 
-        //Check dead dices
-        foreach (Dice dice in teamDices)
+        public override void ExitState()
         {
-            if (dice.CombatController.CurrentHealth <= 0)
-                dice.CombatController.Die();
+            base.ExitState();
+            DicesManager dm = m_gamemode.DicesManager;
+            TurnManager turnManager = m_gamemode.TurnManager;
+            int turnTeam = turnManager.TurnTeam;
+            List<Dice> teamDices = turnTeam == 0 ? dm.FirstTeamDices : dm.SecondTeamDices;
+            foreach (Dice dice in teamDices)
+            {
+                dice.EndTurnUpdates();
+            }
+            turnManager.ChangeTurn();
+            Debug.Log("ExitState : " + gameObject.name);
         }
-        foreach (Dice dice in opponentDices)
+
+        private IEnumerator Fight()
         {
-            if (dice.CombatController.CurrentHealth <= 0)
-                dice.CombatController.Die();
+            //Fight dices
+            List<Dice> teamDices = m_gamemode.TurnManager.TurnTeam == 0 ? m_gamemode.DicesManager.FirstTeamDices : m_gamemode.DicesManager.SecondTeamDices;
+            List<Dice> opponentDices = m_gamemode.TurnManager.TurnTeam == 1 ? m_gamemode.DicesManager.FirstTeamDices : m_gamemode.DicesManager.SecondTeamDices;
+            foreach (Dice dice in teamDices)
+            {
+                List<Tile> surroundingTiles = m_gamemode.Grid.GetSurroundingTiles(dice.DiceMovementController.GamePosition);
+                foreach (Tile tile in surroundingTiles)
+                {
+                    if (tile.CurrentDice is not null && tile.CurrentDice.TeamIndex != dice.TeamIndex)
+                    {
+                        Debug.Log(dice.gameObject.name + " attacks " + tile.CurrentDice.gameObject.name);
+                        dice.CombatController.Attack(tile.CurrentDice.CombatController);
+                        yield return new WaitForSeconds(0.7f);
+                    }
+                }
+            }
+
+            //Check dead dices
+            for(int i = teamDices.Count - 1; i >= 0; --i)
+            {
+                if (teamDices[i].CombatController.CurrentHealth <= 0)
+                    teamDices[i].CombatController.Die();
+            }
+            for (int i = opponentDices.Count - 1; i >= 0; --i)
+            {
+                if (opponentDices[i].CombatController.CurrentHealth <= 0)
+                    opponentDices[i].CombatController.Die();
+            }
+
+
+            //finish fight
+            m_hasFinishedFighting = true;
         }
-        
-        //finish fight
-        m_hasFinishedFighting = true;
     }
 }
