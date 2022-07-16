@@ -33,7 +33,7 @@ public class FightState : FlowState
     {
         DicesManager dm = MOtt.GM.GetCurrentMainStateMachine<LevelGameMode>().DicesManager;
         TurnManager turnManager = MOtt.GM.GetCurrentMainStateMachine<LevelGameMode>().TurnManager;
-        int teamTurn = turnManager.TeamTurn;
+        int teamTurn = turnManager.TurnTeam;
         List<Dice> teamDices = teamTurn == 0 ? dm.FirstTeamDices : dm.SecondTeamDices;
         foreach (Dice dice in teamDices)
         {
