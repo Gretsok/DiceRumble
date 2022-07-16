@@ -15,7 +15,7 @@ namespace DR.Gameplay.Level.Flow
         private int m_movesDoneThisTurn = 0;
         private Dices.Dice m_currentSelectedDice = null;
         private List<Grid.Tile> m_surroundingTiles = null;
-        private bool m_diceIsMoveing;
+        private bool m_diceIsMoving;
 
         private TurnPanel m_panel = null;
 
@@ -52,6 +52,7 @@ namespace DR.Gameplay.Level.Flow
             base.EnterState();
             m_movesDoneThisTurn = 0;
             m_panel.ShowMovementLeft(m_numberMaxOfMoves - m_movesDoneThisTurn);
+            CheckIfAtLeastOneDiceCanMove();
         }
 
         internal override void CleanUpDependencies()
@@ -62,7 +63,7 @@ namespace DR.Gameplay.Level.Flow
 
         private void HandleSelectStarted(InputAction.CallbackContext obj)
         {
-            if (m_diceIsMoveing) return;
+            if (m_diceIsMoving) return;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if(Physics.Raycast(ray, out RaycastHit l_hitInfo))
             {
@@ -70,6 +71,8 @@ namespace DR.Gameplay.Level.Flow
                     && ((m_gamemode.TurnManager.TurnTeam == 0 && m_gamemode.DicesManager.FirstTeamDices.Contains(l_dice.Dice)) 
                         || (m_gamemode.TurnManager.TurnTeam == 1 && m_gamemode.DicesManager.SecondTeamDices.Contains(l_dice.Dice))))
                 {
+                    if (l_dice.Dice.DiceMovementController.RootStacks > 0)  //don't select a rooted dice
+                        return;
                     m_currentSelectedDice = l_dice.Dice;
                 }
                 else if(l_hitInfo.collider.TryGetComponent(out Grid.Tile l_tile) && m_currentSelectedDice != null)
@@ -126,7 +129,7 @@ namespace DR.Gameplay.Level.Flow
             while (true)
             {
                 yield return new WaitForSeconds(0.1f);
-                if (!m_diceIsMoveing)
+                if (!m_diceIsMoving)
                 {
                     m_gamemode.SwitchToNextState();
                     break;
@@ -136,7 +139,7 @@ namespace DR.Gameplay.Level.Flow
 
         public void SetDiceIsMoving(bool p_value)
         {
-            m_diceIsMoveing = p_value;
+            m_diceIsMoving = p_value;
         }
 
 
@@ -157,6 +160,8 @@ namespace DR.Gameplay.Level.Flow
             if (m_currentSelectedDice == null) return;
 
             var moveController = m_currentSelectedDice.GetComponent<Dices.DiceMovementController>();
+            if (moveController.RootStacks > 0)
+                return;
             m_surroundingTiles = m_gamemode.Grid.GetSurroundingTiles(moveController.GamePosition);
             for(int i = 0; i < m_surroundingTiles.Count; ++i)
             {
@@ -189,11 +194,29 @@ namespace DR.Gameplay.Level.Flow
                 {
                     m_currentSelectedDice.GetComponent<Dices.DiceMovementController>().CurrentTile.ShowAsSelectedDice();
                 }
+                else if (dices[i].DiceMovementController.RootStacks > 0)
+                {
+                    dices[i].GetComponent<Dices.DiceMovementController>().CurrentTile.ShowAsRootedDice();
+                }
                 else
                 {
                     dices[i].GetComponent<Dices.DiceMovementController>().CurrentTile.ShowAsTeamDice();
                 }
             }
+        }
+
+        private void CheckIfAtLeastOneDiceCanMove()
+        {
+            List<Dices.Dice> dices = m_gamemode.TurnManager.TurnTeam == 0 ? m_gamemode.DicesManager.FirstTeamDices : m_gamemode.DicesManager.SecondTeamDices;
+            foreach (Dices.Dice dice in dices)
+            {
+                if (dice.DiceMovementController.RootStacks == 0)
+                {
+                    return;
+                }
+            }
+            //no dice can move, skip phase
+            m_gamemode.SwitchToNextState();
         }
     }
 }

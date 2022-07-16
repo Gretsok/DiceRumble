@@ -49,9 +49,17 @@ public class FightState : FlowState
 
     private void Fight()
     {
-        //Fight dices
         List<Dice> teamDices = m_gamemode.TurnManager.TurnTeam == 0 ? m_gamemode.DicesManager.FirstTeamDices : m_gamemode.DicesManager.SecondTeamDices;
         List<Dice> opponentDices = m_gamemode.TurnManager.TurnTeam == 1 ? m_gamemode.DicesManager.FirstTeamDices : m_gamemode.DicesManager.SecondTeamDices;
+        //Active powers
+        foreach (Dice dice in teamDices)
+        {
+            if (dice.CombatController.GetDamages() == 6)
+            {
+                dice.CombatController.UsePower();
+            }
+        }
+        //Fight dices
         foreach (Dice dice in teamDices)
         {
             List<Tile> surroundingTiles = m_gamemode.Grid.GetSurroundingTiles(dice.DiceMovementController.GamePosition);

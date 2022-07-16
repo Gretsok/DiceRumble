@@ -42,13 +42,11 @@ namespace DR.Gameplay.Combat
         public void Attack(CombatController p_target)
         {
             int myDamages = GetDamages();
-            if (myDamages == 6)
-            {
-                UsePower();
-            }
+            myDamages *= 2; //Attacker has double damage
             EDiceType dmgType = EDiceType.Neutral;
             if (m_fireStacks > 0)
             {
+                m_usedFirePowerThisTurn = true;
                 myDamages += m_fireStacks;
                 dmgType = EDiceType.Fire;
             }
@@ -137,10 +135,10 @@ namespace DR.Gameplay.Combat
             }
         }
         
-        private void UsePower()
+        public void UsePower()
         {
+            Debug.Log("Use power on " + gameObject.name);
             DicesManager dm = MOtt.GM.GetCurrentMainStateMachine<LevelGameMode>().DicesManager;
-            List<Dice> teamDices;
             
             switch (m_dice.DiceType)
             {
@@ -148,12 +146,14 @@ namespace DR.Gameplay.Combat
                     m_fireStacks += MOtt.GM.GetCurrentMainStateMachine<LevelGameMode>().GameplayData.FireDamagePerStack;
                     break;
                 case EDiceType.Plant:
+                    Debug.Log("previous : " + m_plantStacks);
                     m_plantStacks += MOtt.GM.GetCurrentMainStateMachine<LevelGameMode>().GameplayData.PlantRootPerStack;
+                    Debug.Log("new : " + m_plantStacks);
                     break;
                 case EDiceType.Poison:
                     int poisonDamage = MOtt.GM.GetCurrentMainStateMachine<LevelGameMode>().GameplayData.PoisonDamage;
-                    teamDices = m_dice.TeamIndex == 0 ? dm.FirstTeamDices : dm.SecondTeamDices;
-                    foreach (Dice dice in teamDices)
+                    List<Dice> enemyDices = m_dice.TeamIndex == 0 ? dm.SecondTeamDices : dm.FirstTeamDices;
+                    foreach (Dice dice in enemyDices)
                     {
                         if (dice.CombatController.Poisoned)
                         {
@@ -163,7 +163,7 @@ namespace DR.Gameplay.Combat
                     break;
                 case EDiceType.Water:
                     int healAmount = MOtt.GM.GetCurrentMainStateMachine<LevelGameMode>().GameplayData.WaterHealAmount;
-                    teamDices = m_dice.TeamIndex == 0 ? dm.FirstTeamDices : dm.SecondTeamDices;
+                    List<Dice> teamDices = m_dice.TeamIndex == 0 ? dm.FirstTeamDices : dm.SecondTeamDices;
                     foreach (Dice dice in teamDices)
                     {
                         if(dice != m_dice)

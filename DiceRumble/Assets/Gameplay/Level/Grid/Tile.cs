@@ -49,6 +49,12 @@ namespace DR.Gameplay.Level.Grid
             m_outline.SetUpAsTeamDice();
             m_outline.gameObject.SetActive(true);
         }
+        
+        public void ShowAsRootedDice()
+        {
+            m_outline.SetUpAsRootedDice();
+            m_outline.gameObject.SetActive(true);
+        }
 
         public void ShowAsSelectedDice()
         {

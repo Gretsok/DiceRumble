@@ -7,17 +7,18 @@ namespace DR.Gameplay.Dices
 {
     public enum EDiceType
     {
-        Neutral,
         Fire,
         Water,
         Plant,
         Poison,
         Rock,
+        Neutral
     }
     
     [RequireComponent(typeof(DiceMovementController), typeof(CombatController))]
     public class Dice : MonoBehaviour
     {
+        [SerializeField]
         private EDiceType m_diceType;
         public EDiceType DiceType => m_diceType;
         

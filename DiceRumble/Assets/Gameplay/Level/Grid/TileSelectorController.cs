@@ -14,6 +14,8 @@ namespace DR.Gameplay.Level.Grid
         private Material m_teamDiceMat = null;
         [SerializeField]
         private Material m_selectedDiceMat = null;
+        [SerializeField]
+        private Material m_rootDiceMat = null;
 
         public void SetUpAsPathPossible()
         {
@@ -23,6 +25,11 @@ namespace DR.Gameplay.Level.Grid
         public void SetUpAsTeamDice()
         {
             m_renderers.ForEach(x => x.material = m_teamDiceMat);
+        }
+        
+        public void SetUpAsRootedDice()
+        {
+            m_renderers.ForEach(x => x.material = m_rootDiceMat);
         }
 
         public void SetUpAsSelectedDice()
