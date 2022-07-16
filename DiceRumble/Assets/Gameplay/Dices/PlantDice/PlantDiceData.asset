@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_diceName: Plant Dice
   m_dicePreviewIcon: {fileID: 21300000, guid: f7684ce91c3fe6e4b89be2b8c66dd301, type: 3}
-  m_dicePrefab: {fileID: 6456250939326182140, guid: f859a2ba2b7f37b45b069ceca59ec71c,
+  m_dicePrefab: {fileID: 703348485358055430, guid: f859a2ba2b7f37b45b069ceca59ec71c,
     type: 3}
+  m_diceHealth: 8
