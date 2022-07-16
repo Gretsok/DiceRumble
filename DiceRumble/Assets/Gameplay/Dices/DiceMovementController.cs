@@ -27,6 +27,9 @@ namespace DR.Gameplay.Dices
 
         [SerializeField]
         private Animations.DiceAnimationsHandler m_animationsHandler = null;
+        [SerializeField]
+        private float m_cooldownToPlay = 0.6f;
+        private float m_lastTimePlayed = float.MinValue;
 
         public void SetTopFace(EDiceTopFace a_diceTopFace)
         {
@@ -35,21 +38,33 @@ namespace DR.Gameplay.Dices
 
         public void RollForward()
         {
+            if (Time.time - m_lastTimePlayed < m_cooldownToPlay) return;
+            m_lastTimePlayed = Time.time;
+
             m_animationsHandler.TriggerRollForwardAnimations();
         }
 
         public void RollBackward()
         {
+            if (Time.time - m_lastTimePlayed < m_cooldownToPlay) return;
+            m_lastTimePlayed = Time.time;
+
             m_animationsHandler.TriggerRollBackwardAnimations();
         }
 
         public void RollLeftward()
         {
+            if (Time.time - m_lastTimePlayed < m_cooldownToPlay) return;
+            m_lastTimePlayed = Time.time;
+
             m_animationsHandler.TriggerRollLeftwardAnimations();
         }
 
         public void RollRightward()
         {
+            if (Time.time - m_lastTimePlayed < m_cooldownToPlay) return;
+            m_lastTimePlayed = Time.time;
+
             m_animationsHandler.TriggerRollRightwardAnimations();
         }
 
