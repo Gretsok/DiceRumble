@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_nextState: {fileID: 1343212579}
   m_panels: []
+  m_gamemode: {fileID: 324146160}
 --- !u!4 &154638321
 Transform:
   m_ObjectHideFlags: 0
@@ -245,6 +246,7 @@ MonoBehaviour:
   m_defaultState: {fileID: 395047983}
   m_dicesManager: {fileID: 243710100}
   m_turnManager: {fileID: 1314489178}
+  m_gameplayData: {fileID: 0}
 --- !u!4 &324146161
 Transform:
   m_ObjectHideFlags: 0
@@ -387,6 +389,7 @@ MonoBehaviour:
   m_nextState: {fileID: 154638320}
   m_panels: []
   m_gamemode: {fileID: 324146160}
+  m_numberMaxOfMoves: 5
 --- !u!4 &1343212580
 Transform:
   m_ObjectHideFlags: 0

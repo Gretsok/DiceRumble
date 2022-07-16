@@ -42,6 +42,7 @@ namespace DR.Gameplay.Level.Flow
                         || (m_gamemode.TurnManager.TurnTeam == 1 && m_gamemode.DicesManager.SecondTeamDices.Contains(l_dice.Dice))))
                 {
                     m_currentSelectedDice = l_dice.Dice;
+                    EmptySurroundingTiles();
                     GetSurroundingTiles();
                 }
                 else if(l_hitInfo.collider.TryGetComponent(out Grid.Tile l_tile) && m_currentSelectedDice != null)
@@ -93,12 +94,24 @@ namespace DR.Gameplay.Level.Flow
 
         private void EmptySurroundingTiles()
         {
+            if (m_surroundingTiles == null) return;
+            for (int i = 0; i < m_surroundingTiles.Count; ++i)
+            {
+                m_surroundingTiles[i].HideOutile();
+            }
             m_surroundingTiles.Clear();
         }
 
         private void GetSurroundingTiles()
         {
             m_surroundingTiles = m_gamemode.Grid.GetSurroundingTiles(m_currentSelectedDice.GetComponent<Dices.DiceMovementController>().GamePosition);
+            for(int i = 0; i < m_surroundingTiles.Count; ++i)
+            {
+                if(m_surroundingTiles[i].CurrentDice == null)
+                {
+                    m_surroundingTiles[i].ShowOutline();
+                }
+            }
         }
     }
 }
