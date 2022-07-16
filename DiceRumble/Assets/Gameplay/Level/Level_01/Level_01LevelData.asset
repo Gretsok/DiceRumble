@@ -17,6 +17,8 @@ MonoBehaviour:
     m_SceneAsset: {fileID: 102900000, guid: 84fbdab3f7a9c014caccd08b0c0b03c4, type: 3}
     m_SceneName: Gameplay_Logic
   m_additionalScenes:
+  - m_SceneAsset: {fileID: 102900000, guid: 811cd75d48cd4b246989ad125485be82, type: 3}
+    m_SceneName: Enviro_01
   - m_SceneAsset: {fileID: 102900000, guid: b7e573a7e7aa5724595bfe20fe1fd390, type: 3}
     m_SceneName: Level_01
   m_loadingScreen:
