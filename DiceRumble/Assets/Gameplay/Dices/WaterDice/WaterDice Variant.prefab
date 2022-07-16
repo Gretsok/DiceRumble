@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2455939118366407682, guid: 15eda07805240e74e950b0578f4e52df,
+        type: 3}
+      propertyPath: m_Name
+      value: DiceModelParent
+      objectReference: {fileID: 0}
     - target: {fileID: 3284593777537758434, guid: 15eda07805240e74e950b0578f4e52df,
         type: 3}
       propertyPath: m_RootOrder

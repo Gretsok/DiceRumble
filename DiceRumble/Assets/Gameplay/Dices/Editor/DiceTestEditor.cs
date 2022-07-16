@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace DR.Gameplay.Dices.Editor
 {
-    [UnityEditor.CustomEditor(typeof(Dice))]
+    [UnityEditor.CustomEditor(typeof(DiceMovementController))]
     public class DiceTestEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
@@ -12,19 +12,19 @@ namespace DR.Gameplay.Dices.Editor
 
             if (GUILayout.Button("Roll forward"))
             {
-
+                (target as DiceMovementController).RollForward();
             }
             if (GUILayout.Button("Roll backward"))
             {
-
+                (target as DiceMovementController).RollBackward();
             }
             if (GUILayout.Button("Roll rightward"))
             {
-
+                (target as DiceMovementController).RollRightward();
             }
             if (GUILayout.Button("Roll leftward"))
             {
-
+                (target as DiceMovementController).RollLeftward();
             }
         }
     }
