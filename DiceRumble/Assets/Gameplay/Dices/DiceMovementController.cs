@@ -34,6 +34,10 @@ namespace DR.Gameplay.Dices
         private LayerMask m_facesLayerMask = default;
         private bool m_canRoll = true;
 
+        public Vector2Int GamePosition { get; set; }
+
+        public Action<DiceMovementController> OnTileChanged = null;
+
         private void Start()
         {
             m_animationsHandler.OnRollFinished += HandleRollFinished;
@@ -68,7 +72,7 @@ namespace DR.Gameplay.Dices
         {
             if (!m_canRoll) return;
             m_canRoll = false;
-
+            GamePosition += Vector2Int.down;
             m_animationsHandler.TriggerRollForwardAnimations();
         }
 
@@ -76,7 +80,7 @@ namespace DR.Gameplay.Dices
         {
             if (!m_canRoll) return;
             m_canRoll = false;
-
+            GamePosition += Vector2Int.up;
             m_animationsHandler.TriggerRollBackwardAnimations();
         }
 
@@ -84,7 +88,7 @@ namespace DR.Gameplay.Dices
         {
             if (!m_canRoll) return;
             m_canRoll = false;
-
+            GamePosition += Vector2Int.left;
             m_animationsHandler.TriggerRollLeftwardAnimations();
         }
 
@@ -92,7 +96,7 @@ namespace DR.Gameplay.Dices
         {
             if (!m_canRoll) return;
             m_canRoll = false;
-
+            GamePosition += Vector2Int.right;
             m_animationsHandler.TriggerRollRightwardAnimations();
         }
 

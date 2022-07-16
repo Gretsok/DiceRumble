@@ -16,6 +16,8 @@ namespace DR.Gameplay.Dices.Manager
             {
                 var newDice = Instantiate(a_teamsDataConveyor.FirstTeamDicesData[i].DicePrefab, a_grid.transform);
                 var spawnTile = a_grid.TryToGetTile(a_grid.FirstTeamSpawnPositions[i]);
+                spawnTile.TryToSetCurrentDice(newDice);
+                newDice.GetComponent<DiceMovementController>().GamePosition = a_grid.FirstTeamSpawnPositions[i];
                 newDice.transform.position = spawnTile.transform.position;
                 newDice.transform.rotation = spawnTile.transform.rotation;
                 newDice.Init(a_teamsDataConveyor.FirstTeamDicesData[i].DiceHealth);
@@ -26,6 +28,8 @@ namespace DR.Gameplay.Dices.Manager
             {
                 var newDice = Instantiate(a_teamsDataConveyor.SecondTeamDicesData[i].DicePrefab, a_grid.transform);
                 var spawnTile = a_grid.TryToGetTile(a_grid.SecondteamSpawnPositions[i]);
+                spawnTile.TryToSetCurrentDice(newDice);
+                newDice.GetComponent<DiceMovementController>().GamePosition = a_grid.SecondteamSpawnPositions[i];
                 newDice.transform.position = spawnTile.transform.position;
                 newDice.transform.rotation = spawnTile.transform.rotation;
                 newDice.Init(a_teamsDataConveyor.SecondTeamDicesData[i].DiceHealth);

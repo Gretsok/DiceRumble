@@ -4,8 +4,8 @@ namespace DR.Gameplay.Level.Flow
 {
     public class TurnManager : MonoBehaviour
     {
-        private int m_teamTurn;
-        public int TeamTurn => m_teamTurn;
+        private int m_turnTeam;
+        public int TurnTeam => m_turnTeam;
         
         // Start is called before the first frame update
         void Start()
@@ -21,7 +21,7 @@ namespace DR.Gameplay.Level.Flow
 
         public void SetTeamTurn(int p_teamIndex)
         {
-            m_teamTurn = p_teamIndex;
+            m_turnTeam = p_teamIndex;
         }
     }
 }

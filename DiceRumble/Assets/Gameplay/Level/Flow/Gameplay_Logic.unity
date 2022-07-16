@@ -294,6 +294,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_nextState: {fileID: 1343212579}
   m_panels: []
+  m_gamemode: {fileID: 324146160}
+  m_stateDuration: 2
 --- !u!4 &395047984
 Transform:
   m_ObjectHideFlags: 0
@@ -384,6 +386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_nextState: {fileID: 154638320}
   m_panels: []
+  m_gamemode: {fileID: 324146160}
 --- !u!4 &1343212580
 Transform:
   m_ObjectHideFlags: 0
