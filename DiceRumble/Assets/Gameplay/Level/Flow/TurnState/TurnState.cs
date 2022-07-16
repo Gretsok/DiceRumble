@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace DR.Gameplay.Level.Flow
+namespace DR.Gameplay.Level.Flow.TurnState
 {
     public class TurnState : FlowState
     {
@@ -75,18 +75,20 @@ namespace DR.Gameplay.Level.Flow
                         return;
                     m_currentSelectedDice = l_dice.Dice;
                 }
-                else if(l_hitInfo.collider.TryGetComponent(out Grid.Tile l_tile) && m_currentSelectedDice != null)
+                else if(l_hitInfo.collider.TryGetComponent(out Grid.Tile l_tile))
                 {
-                    if(m_surroundingTiles.Contains(l_tile) 
-                        && m_currentSelectedDice.GetComponent<Dices.DiceMovementController>().LastTile != l_tile)
-                    {
-                        if(m_gamemode.Grid.TryToGetTile(l_tile.GamePosition) != null
+                    if(m_currentSelectedDice != null
+                        && m_surroundingTiles.Contains(l_tile) 
+                        && m_currentSelectedDice.GetComponent<Dices.DiceMovementController>().LastTile != l_tile
+                        && m_gamemode.Grid.TryToGetTile(l_tile.GamePosition) != null
                             && l_tile.TryToSetCurrentDice(m_currentSelectedDice))
-                        {
+                    {         
                             MoveDiceToTile(l_tile);
                             m_currentSelectedDice = null;
-                        }
-                        
+                    }
+                    else if(l_tile.CurrentDice != null)
+                    {
+                        m_currentSelectedDice = l_tile.CurrentDice;
                     }
                 }
             }

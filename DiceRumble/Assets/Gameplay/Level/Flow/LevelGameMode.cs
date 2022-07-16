@@ -22,6 +22,9 @@ namespace DR.Gameplay.Level.Flow
         public Grid.Grid Grid => m_grid;
         private Teams.TeamsDataConveyor m_teamsDataConveyor = null;
 
+        [SerializeField]
+        private FlowState m_endState = null;
+
         public override IEnumerator LoadAsync()
         {
             while(m_grid == null)
@@ -34,10 +37,16 @@ namespace DR.Gameplay.Level.Flow
             MOtter.MOtt.DATACONVEY.UnregisterContainer(m_teamsDataConveyor);
 
             m_dicesManager.SetUpDices(m_teamsDataConveyor, m_grid);
+            m_dicesManager.OnTeamEliminated += HandleTeamEliminated;
 
             yield return StartCoroutine(base.LoadAsync());
         }
 
+        private void HandleTeamEliminated()
+        {
+            m_dicesManager.OnTeamEliminated -= HandleTeamEliminated;
 
+            SwitchToState(m_endState);
+        }
     }
 }

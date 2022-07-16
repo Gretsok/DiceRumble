@@ -342,6 +342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7016285758096776730}
   - component: {fileID: 3516010007189701251}
+  - component: {fileID: 984420633414177076}
   m_Layer: 0
   m_Name: ExtraContainer
   m_TagString: Untagged
@@ -388,6 +389,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &984420633414177076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2765367265894790200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40faa5b89bbf81a419417dcceebded86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3284593777537758435
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,6 +470,7 @@ MonoBehaviour:
   m_facesLayerMask:
     serializedVersion: 2
     m_Bits: 512
+  m_extrasRotationBrain: {fileID: 984420633414177076}
 --- !u!114 &7961841417974848064
 MonoBehaviour:
   m_ObjectHideFlags: 0
