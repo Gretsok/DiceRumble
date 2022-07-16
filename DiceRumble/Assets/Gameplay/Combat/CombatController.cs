@@ -51,6 +51,7 @@ namespace DR.Gameplay.Combat
             }
             ApplyCombatEffects(p_target);
             int dmgToDeal = myDamages - p_target.GetDamages();
+            Debug.Log("Damage To Inflict : " + dmgToDeal);
             if (dmgToDeal > 0)
             {
                 p_target.TakeDamage(dmgToDeal, dmgType);
@@ -70,9 +71,7 @@ namespace DR.Gameplay.Combat
             }
             m_currentHealth -= p_damage;
             if (m_currentHealth <= 0)
-            {
-                Die();
-            }
+                m_currentHealth = 0;
         }
         
         public int GetDamages()
@@ -113,6 +112,11 @@ namespace DR.Gameplay.Combat
         public void Poison()
         {
             m_poisoned = true;
+        }
+        
+        public void Die()
+        {
+            Debug.Log("ME DEAD!");
         }
 
         private void ApplyCombatEffects(CombatController p_target)
@@ -157,7 +161,8 @@ namespace DR.Gameplay.Combat
                     teamDices = m_dice.TeamIndex == 0 ? dm.FirstTeamDices : dm.SecondTeamDices;
                     foreach (Dice dice in teamDices)
                     {
-                        dice.CombatController.Heal(healAmount);
+                        if(dice != m_dice)
+                            dice.CombatController.Heal(healAmount);
                     }
                     break;
                 case EDiceType.Rock:
@@ -174,11 +179,6 @@ namespace DR.Gameplay.Combat
         private void SetCurrentHealth(int p_currentHealth)
         {
             m_currentHealth = p_currentHealth;
-        }
-        
-        private void Die()
-        {
-            Debug.Log("ME DEAD!");
         }
     }
 }

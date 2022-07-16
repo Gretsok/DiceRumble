@@ -246,7 +246,7 @@ MonoBehaviour:
   m_defaultState: {fileID: 395047983}
   m_dicesManager: {fileID: 243710100}
   m_turnManager: {fileID: 1314489178}
-  m_gameplayData: {fileID: 0}
+  m_gameplayData: {fileID: 11400000, guid: 7383dbd4e3dd9044eb659f4b2c27b4ff, type: 2}
 --- !u!4 &324146161
 Transform:
   m_ObjectHideFlags: 0
