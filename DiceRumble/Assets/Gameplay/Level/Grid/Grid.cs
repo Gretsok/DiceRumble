@@ -58,8 +58,10 @@ namespace DR.Gameplay.Level.Grid
                     for (int y = 0; y < m_gridSize.y; ++y)
                     {
                         Tile newTile = UnityEditor.PrefabUtility.InstantiatePrefab(m_tilesPrefabs[Random.Range(0, m_tilesPrefabs.Count)], transform) as Tile;
+                        newTile.GamePosition = new Vector2Int(x, y);
                         m_tiles[x].Tiles.Add(newTile);
                         newTile.transform.localPosition = x * m_tileSize.x * Vector3.right + y * m_tileSize.y * Vector3.back;
+                        UnityEditor.EditorUtility.SetDirty(newTile);
                     }
                 }
 
@@ -80,5 +82,23 @@ namespace DR.Gameplay.Level.Grid
             return m_tiles[a_gamePosition.x].Tiles[a_gamePosition.y];
         }
 
+
+        public List<Tile> GetSurroundingTiles(Vector2Int a_gamePosition)
+        {
+            List<Tile> tiles = new List<Tile>();
+            Tile tile = TryToGetTile(a_gamePosition + new Vector2Int(0, 1));
+            if (tile != null)
+                tiles.Add(tile);
+            tile = TryToGetTile(a_gamePosition + new Vector2Int(0, -1));
+            if (tile != null)
+                tiles.Add(tile);
+            tile = TryToGetTile(a_gamePosition + new Vector2Int(1, 0));
+            if (tile != null)
+                tiles.Add(tile);
+            tile = TryToGetTile(a_gamePosition + new Vector2Int(-1, 0));
+            if (tile != null)
+                tiles.Add(tile);
+            return tiles;
+        }
     }
 }

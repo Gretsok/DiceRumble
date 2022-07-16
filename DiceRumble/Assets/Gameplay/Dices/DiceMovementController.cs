@@ -36,6 +36,9 @@ namespace DR.Gameplay.Dices
 
         private int m_rootStacks;
         public int RootStacks => m_rootStacks;
+        public Vector2Int GamePosition { get; set; }
+
+        public Action<DiceMovementController> OnTileChanged = null;
 
         private void Start()
         {
@@ -71,7 +74,7 @@ namespace DR.Gameplay.Dices
         {
             if (!m_canRoll) return;
             m_canRoll = false;
-
+            GamePosition += Vector2Int.down;
             m_animationsHandler.TriggerRollForwardAnimations();
         }
 
@@ -79,7 +82,7 @@ namespace DR.Gameplay.Dices
         {
             if (!m_canRoll) return;
             m_canRoll = false;
-
+            GamePosition += Vector2Int.up;
             m_animationsHandler.TriggerRollBackwardAnimations();
         }
 
@@ -87,7 +90,7 @@ namespace DR.Gameplay.Dices
         {
             if (!m_canRoll) return;
             m_canRoll = false;
-
+            GamePosition += Vector2Int.left;
             m_animationsHandler.TriggerRollLeftwardAnimations();
         }
 
@@ -95,7 +98,7 @@ namespace DR.Gameplay.Dices
         {
             if (!m_canRoll) return;
             m_canRoll = false;
-
+            GamePosition += Vector2Int.right;
             m_animationsHandler.TriggerRollRightwardAnimations();
         }
 

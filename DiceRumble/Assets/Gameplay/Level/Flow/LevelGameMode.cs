@@ -19,6 +19,7 @@ namespace DR.Gameplay.Level.Flow
         public Gameplay.Data.GameplayData GameplayData => m_gameplayData;
 
         private Grid.Grid m_grid = null;
+        public Grid.Grid Grid => m_grid;
         private Teams.TeamsDataConveyor m_teamsDataConveyor = null;
 
         public override IEnumerator LoadAsync()

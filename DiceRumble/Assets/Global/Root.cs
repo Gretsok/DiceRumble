@@ -8,6 +8,7 @@ public class Root : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        MOtter.MOtt.PLAYERS.PlayerInputManager.JoinPlayer();
         m_firstLevelData.LoadLevel();   
     }
 }

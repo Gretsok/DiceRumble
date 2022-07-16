@@ -9,6 +9,7 @@ namespace MOtter.PlayersManagement
     {
         [SerializeField]
         private PlayerInputManager m_inputManager = null;
+        public PlayerInputManager PlayerInputManager => m_inputManager;
 
         private List<PlayerProfile> m_instantiatedPlayerProfiles = new List<PlayerProfile>();
 
