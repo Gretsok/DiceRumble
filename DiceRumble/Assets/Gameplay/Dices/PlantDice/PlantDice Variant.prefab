@@ -67,6 +67,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlantDice Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 4636419457998893178, guid: 15eda07805240e74e950b0578f4e52df,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 239b63f331e4f224bb3742ee161fbff3, type: 2}
     - target: {fileID: 6339034332012045127, guid: 15eda07805240e74e950b0578f4e52df,
         type: 3}
       propertyPath: m_RootOrder
