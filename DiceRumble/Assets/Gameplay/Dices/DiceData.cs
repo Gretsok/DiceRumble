@@ -10,10 +10,10 @@ namespace DR.Gameplay.Dices
         [SerializeField]
         private Sprite m_dicePreviewIcon = null;
         [SerializeField]
-        private Dice m_dicePrefab = null;
+        private DiceMovementController m_dicePrefab = null;
 
         public string DiceName => m_diceName;
         public Sprite DicePreviewIcon => m_dicePreviewIcon;
-        public Dice DicePrefab => m_dicePrefab;
+        public DiceMovementController DicePrefab => m_dicePrefab;
     }
 }

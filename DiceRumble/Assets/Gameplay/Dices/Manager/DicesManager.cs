@@ -5,10 +5,10 @@ namespace DR.Gameplay.Dices.Manager
 {
     public class DicesManager : MonoBehaviour
     {
-        private List<Dice> m_firstTeamDices = new List<Dice>();
-        private List<Dice> m_secondTeamDices = new List<Dice>();
-        public List<Dice> FirstTeamDices => m_firstTeamDices;
-        public List<Dice> SecondTeamDices => m_secondTeamDices;
+        private List<DiceMovementController> m_firstTeamDices = new List<DiceMovementController>();
+        private List<DiceMovementController> m_secondTeamDices = new List<DiceMovementController>();
+        public List<DiceMovementController> FirstTeamDices => m_firstTeamDices;
+        public List<DiceMovementController> SecondTeamDices => m_secondTeamDices;
 
 
 

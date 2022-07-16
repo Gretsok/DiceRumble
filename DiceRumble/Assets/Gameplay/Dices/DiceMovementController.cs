@@ -2,7 +2,7 @@
 
 namespace DR.Gameplay.Dices
 {
-    public class Dice : MonoBehaviour
+    public class DiceMovementController : MonoBehaviour
     {
         public enum EDiceTopFace
         {
