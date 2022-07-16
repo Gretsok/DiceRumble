@@ -29,12 +29,15 @@ namespace DR.Gameplay.Dices
         [SerializeField]
         private Animations.DiceAnimationsHandler m_animationsHandler = null;
         [SerializeField]
-        private float m_cooldownToPlay = 0.6f;
-        private float m_lastTimePlayed = float.MinValue;
+        private Transform m_model = null;
+        [SerializeField]
+        private LayerMask m_facesLayerMask = default;
+        private bool m_canRoll = true;
 
         private void Start()
         {
             m_animationsHandler.OnRollFinished += HandleRollFinished;
+            SetTopFace();
         }
 
         private void OnDestroy()
@@ -44,42 +47,51 @@ namespace DR.Gameplay.Dices
 
         private void HandleRollFinished()
         {
-            throw new NotImplementedException();
+            SetTopFace();
+            m_canRoll = true;
         }
 
-        private void SetTopFace(EDiceTopFace a_diceTopFace)
+        private void SetTopFace()
         {
-            m_diceTopFace = a_diceTopFace;
+            if (Physics.Raycast(m_model.transform.position - Vector3.up * 2f, Vector3.up, out RaycastHit l_hitInfo, 2.5f, m_facesLayerMask))
+            {
+                if(l_hitInfo.collider.TryGetComponent(out DiceFaceHandler l_diceFaceHandler))
+                {
+                    m_diceTopFace = l_diceFaceHandler.DiceTopFaceIfThisFaceIsOnGround;
+                    return;
+                }
+            }
+            Debug.LogError("Could not determine top face");
         }
 
         public void RollForward()
         {
-            if (Time.time - m_lastTimePlayed < m_cooldownToPlay) return;
-            m_lastTimePlayed = Time.time;
+            if (!m_canRoll) return;
+            m_canRoll = false;
 
             m_animationsHandler.TriggerRollForwardAnimations();
         }
 
         public void RollBackward()
         {
-            if (Time.time - m_lastTimePlayed < m_cooldownToPlay) return;
-            m_lastTimePlayed = Time.time;
+            if (!m_canRoll) return;
+            m_canRoll = false;
 
             m_animationsHandler.TriggerRollBackwardAnimations();
         }
 
         public void RollLeftward()
         {
-            if (Time.time - m_lastTimePlayed < m_cooldownToPlay) return;
-            m_lastTimePlayed = Time.time;
+            if (!m_canRoll) return;
+            m_canRoll = false;
 
             m_animationsHandler.TriggerRollLeftwardAnimations();
         }
 
         public void RollRightward()
         {
-            if (Time.time - m_lastTimePlayed < m_cooldownToPlay) return;
-            m_lastTimePlayed = Time.time;
+            if (!m_canRoll) return;
+            m_canRoll = false;
 
             m_animationsHandler.TriggerRollRightwardAnimations();
         }

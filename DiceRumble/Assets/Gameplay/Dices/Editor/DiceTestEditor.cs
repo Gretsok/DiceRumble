@@ -26,6 +26,8 @@ namespace DR.Gameplay.Dices.Editor
             {
                 (target as DiceMovementController).RollLeftward();
             }
+
+            GUILayout.Label($"Top face : {(target as DiceMovementController).DiceTopFace.ToString()}");
         }
     }
 }
