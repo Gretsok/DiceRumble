@@ -10,9 +10,12 @@ namespace DR.Gameplay.Dices.Animations
         private int ROLL_BACKWARD = Animator.StringToHash("RollBackward");
         private int ROLL_LEFTWARD = Animator.StringToHash("RollLeftward");
         private int ROLL_RIGHTWARD = Animator.StringToHash("RollRightward");
+        private int MOVING = Animator.StringToHash("Moving");
 
         [SerializeField]
         private Animator m_movementAnimator = null;
+        [SerializeField]
+        private Animator m_extraAnimator = null;
         [SerializeField]
         private Transform m_rotationModelTransform = null;
 
@@ -22,24 +25,28 @@ namespace DR.Gameplay.Dices.Animations
         {
             m_movementAnimator.SetTrigger(ROLL_FORWARD);
             StartCoroutine(RotateRoutine(transform.right * 90f));
+            m_extraAnimator.SetTrigger(MOVING);
         }
 
         public void TriggerRollBackwardAnimations()
         {
             m_movementAnimator.SetTrigger(ROLL_BACKWARD);
             StartCoroutine(RotateRoutine(transform.right * -90f));
+            m_extraAnimator.SetTrigger(MOVING);
         }
 
         public void TriggerRollLeftwardAnimations()
         {
             m_movementAnimator.SetTrigger(ROLL_LEFTWARD);
             StartCoroutine(RotateRoutine(transform.forward * 90f));
+            m_extraAnimator.SetTrigger(MOVING);
         }
 
         public void TriggerRollRightwardAnimations()
         {
             m_movementAnimator.SetTrigger(ROLL_RIGHTWARD);
             StartCoroutine(RotateRoutine(transform.forward * -90f));
+            m_extraAnimator.SetTrigger(MOVING);
         }
 
         private IEnumerator RotateRoutine(Vector3 a_rotationToAdd, float a_timeToRotate = 0.67f)
