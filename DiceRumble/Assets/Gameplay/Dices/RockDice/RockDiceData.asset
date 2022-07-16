@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RockDiceData
   m_EditorClassIdentifier: 
   m_diceName: Rock Dice
-  m_dicePreviewIcon: {fileID: 21300000, guid: bd72bc5706ec82843bdb72f365cc5002, type: 3}
+  m_dicePreviewIcon: {fileID: 21300000, guid: e7d574a8be236a54aa951110d995bf68, type: 3}
   m_dicePrefab: {fileID: 8680309392109574265, guid: d15ce14ae5a047341988b5e16bff52cb,
     type: 3}

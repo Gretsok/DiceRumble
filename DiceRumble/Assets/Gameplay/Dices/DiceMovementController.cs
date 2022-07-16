@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace DR.Gameplay.Dices
 {
@@ -31,7 +32,22 @@ namespace DR.Gameplay.Dices
         private float m_cooldownToPlay = 0.6f;
         private float m_lastTimePlayed = float.MinValue;
 
-        public void SetTopFace(EDiceTopFace a_diceTopFace)
+        private void Start()
+        {
+            m_animationsHandler.OnRollFinished += HandleRollFinished;
+        }
+
+        private void OnDestroy()
+        {
+            m_animationsHandler.OnRollFinished -= HandleRollFinished;
+        }
+
+        private void HandleRollFinished()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SetTopFace(EDiceTopFace a_diceTopFace)
         {
             m_diceTopFace = a_diceTopFace;
         }

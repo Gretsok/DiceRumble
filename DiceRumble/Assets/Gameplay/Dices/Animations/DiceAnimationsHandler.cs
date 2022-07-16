@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -14,6 +15,8 @@ namespace DR.Gameplay.Dices.Animations
         private Animator m_movementAnimator = null;
         [SerializeField]
         private Transform m_rotationModelTransform = null;
+
+        public Action OnRollFinished = null;
 
         public void TriggerRollForwardAnimations()
         {
@@ -48,13 +51,11 @@ namespace DR.Gameplay.Dices.Animations
             m_rotationModelTransform.rotation = startingRotation;
             while(Time.time - timeOfStart <= a_timeToRotate)
             {
-                Debug.Log($"TIME : {Time.time - timeOfStart}");
                 m_rotationModelTransform.rotation = Quaternion.Slerp(startingRotation, finalRotation, (Time.time - timeOfStart) / a_timeToRotate);
                 yield return null;
             }
-            Debug.Log("Rotation finish");
-            Debug.Log($"TIME : {Time.time - timeOfStart}");
             m_rotationModelTransform.rotation = finalRotation;
+            OnRollFinished?.Invoke();
         }
     }
 }
