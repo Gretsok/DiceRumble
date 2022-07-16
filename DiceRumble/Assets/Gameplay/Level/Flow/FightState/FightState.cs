@@ -65,8 +65,8 @@ namespace DR.Gameplay.Level.Flow.FightState
             //Fight dices
             foreach (Dice dice in teamDices)
             {
-            List<Tile> surroundingTiles = m_gamemode.Grid.GetSurroundingTiles(dice.DiceMovementController.GamePosition);
-            foreach (Tile tile in surroundingTiles)
+                List<Tile> surroundingTiles = m_gamemode.Grid.GetSurroundingTiles(dice.DiceMovementController.GamePosition);
+                foreach (Tile tile in surroundingTiles)
                 {
                     if (tile.CurrentDice is not null && tile.CurrentDice.TeamIndex != dice.TeamIndex)
                     {
@@ -88,8 +88,7 @@ namespace DR.Gameplay.Level.Flow.FightState
                 if (opponentDices[i].CombatController.CurrentHealth <= 0)
                     opponentDices[i].CombatController.Die();
             }
-
-
+            
             //finish fight
             m_hasFinishedFighting = true;
         }

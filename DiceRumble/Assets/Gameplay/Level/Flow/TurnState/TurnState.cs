@@ -44,15 +44,21 @@ namespace DR.Gameplay.Level.Flow.TurnState
             base.UnregisterEvents();
             MOtter.MOtt.PLAYERS.GetActions(0).FindActionMap("Gameplay").FindAction("Select").started -= HandleSelectStarted;
         }
-
-
+        
 
         public override void EnterState()
         {
             base.EnterState();
+            Debug.Log("EnterState : " + gameObject.name);
             m_movesDoneThisTurn = 0;
             m_panel.ShowMovementLeft(m_numberMaxOfMoves - m_movesDoneThisTurn);
             CheckIfAtLeastOneDiceCanMove();
+        }
+
+        public override void ExitState()
+        {
+            base.ExitState();
+            Debug.Log("ExitState : " + gameObject.name);
         }
 
         internal override void CleanUpDependencies()
@@ -130,12 +136,12 @@ namespace DR.Gameplay.Level.Flow.TurnState
         {
             while (true)
             {
-                yield return new WaitForSeconds(0.1f);
                 if (!m_diceIsMoving)
                 {
                     m_gamemode.SwitchToNextState();
                     break;
                 }
+                yield return new WaitForSeconds(0.1f);
             }
         }
 
@@ -217,6 +223,7 @@ namespace DR.Gameplay.Level.Flow.TurnState
                     return;
                 }
             }
+            Debug.Log("all dices are rooted, skipping phase");
             //no dice can move, skip phase
             m_gamemode.SwitchToNextState();
         }
