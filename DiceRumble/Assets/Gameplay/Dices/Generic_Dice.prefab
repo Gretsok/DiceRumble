@@ -124,8 +124,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3284593777537758434}
-  - component: {fileID: 3852319021839745850}
+  - component: {fileID: 7290714270004658624}
   - component: {fileID: 8924552140896142404}
+  - component: {fileID: 3852319021839745850}
+  - component: {fileID: 7961841417974848064}
   m_Layer: 0
   m_Name: Generic_Dice
   m_TagString: Untagged
@@ -149,7 +151,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3852319021839745850
+--- !u!114 &7290714270004658624
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,9 +160,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3284593777537758435}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98699453e2f367441879531c9d134b6f, type: 3}
+  m_Script: {fileID: 11500000, guid: 79f138751d85425489f8b00e8dbfdb62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_diceType: 0
+  m_diceMovementController: {fileID: 3852319021839745850}
+  m_combatController: {fileID: 7961841417974848064}
 --- !u!65 &8924552140896142404
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -174,3 +179,28 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &3852319021839745850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3284593777537758435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98699453e2f367441879531c9d134b6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_animationsHandler: {fileID: 0}
+--- !u!114 &7961841417974848064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3284593777537758435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24384e097fbb7df44b92e807105c9eda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

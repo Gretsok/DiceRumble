@@ -5,13 +5,11 @@ namespace DR.Gameplay.Dices.Manager
 {
     public class DicesManager : MonoBehaviour
     {
-        private List<DiceMovementController> m_firstTeamDices = new List<DiceMovementController>();
-        private List<DiceMovementController> m_secondTeamDices = new List<DiceMovementController>();
-        public List<DiceMovementController> FirstTeamDices => m_firstTeamDices;
-        public List<DiceMovementController> SecondTeamDices => m_secondTeamDices;
-
-
-
+        private List<Dice> m_firstTeamDices = new List<Dice>();
+        private List<Dice> m_secondTeamDices = new List<Dice>();
+        public List<Dice> FirstTeamDices => m_firstTeamDices;
+        public List<Dice> SecondTeamDices => m_secondTeamDices;
+        
         public void SetUpDices(Teams.TeamsDataConveyor a_teamsDataConveyor, Level.Grid.Grid a_grid)
         {
             for (int i = 0; i < a_teamsDataConveyor.FirstTeamDicesData.Count; ++i)
@@ -20,6 +18,7 @@ namespace DR.Gameplay.Dices.Manager
                 var spawnTile = a_grid.TryToGetTile(a_grid.FirstTeamSpawnPositions[i]);
                 newDice.transform.position = spawnTile.transform.position;
                 newDice.transform.rotation = spawnTile.transform.rotation;
+                newDice.Init(a_teamsDataConveyor.FirstTeamDicesData[i].DiceHealth);
                 m_firstTeamDices.Add(newDice);
             }
 
@@ -29,6 +28,7 @@ namespace DR.Gameplay.Dices.Manager
                 var spawnTile = a_grid.TryToGetTile(a_grid.SecondteamSpawnPositions[i]);
                 newDice.transform.position = spawnTile.transform.position;
                 newDice.transform.rotation = spawnTile.transform.rotation;
+                newDice.Init(a_teamsDataConveyor.SecondTeamDicesData[i].DiceHealth);
                 m_secondTeamDices.Add(newDice);
             }
         }

@@ -9,6 +9,10 @@ namespace DR.Gameplay.Level.Flow
         [SerializeField]
         private Dices.Manager.DicesManager m_dicesManager = null;
         public Dices.Manager.DicesManager DicesManager => m_dicesManager;
+        
+        [SerializeField] 
+        private Gameplay.Level.Flow.TurnManager m_turnManager = null;
+        public Gameplay.Level.Flow.TurnManager TurnManager => m_turnManager;
 
         private Grid.Grid m_grid = null;
         private Teams.TeamsDataConveyor m_teamsDataConveyor = null;
