@@ -100,5 +100,10 @@ namespace DR.Gameplay.Level.Grid
                 tiles.Add(tile);
             return tiles;
         }
+
+        public void ResetAllOutlines()
+        {
+            m_tiles.ForEach(x => x.Tiles.ForEach(t => t.ShowAsNothingSpecial()));
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace DR.Gameplay.Level.Grid
         [SerializeField]
         private Vector2Int m_gamePosition = default;
         [SerializeField]
-        private GameObject m_outline = null;
+        private TileSelectorController m_outline = null;
         public Vector2Int GamePosition 
         { 
             get
@@ -27,25 +27,38 @@ namespace DR.Gameplay.Level.Grid
             if (CurrentDice != null) return false;
             CurrentDice = a_dice;
             var moveController = CurrentDice.GetComponent<DiceMovementController>();
-            moveController.OnTileChanged?.Invoke(moveController);
+            moveController.ChangeTile(moveController, this);
             moveController.OnTileChanged += HandleDiceMoved;
             return true;
         }
 
-        private void HandleDiceMoved(DiceMovementController obj)
+        private void HandleDiceMoved(DiceMovementController obj, Tile arg1)
         {
             obj.OnTileChanged -= HandleDiceMoved;
             CurrentDice = null;
         }
 
-        public void ShowOutline()
+        public void ShowAsPathPossible()
         {
-            m_outline.SetActive(true);
+            m_outline.SetUpAsPathPossible();
+            m_outline.gameObject.SetActive(true);
         }
 
-        public void HideOutile()
+        public void ShowAsTeamDice()
         {
-            m_outline.SetActive(false);
+            m_outline.SetUpAsTeamDice();
+            m_outline.gameObject.SetActive(true);
+        }
+
+        public void ShowAsSelectedDice()
+        {
+            m_outline.SetUpAsSelectedDice();
+            m_outline.gameObject.SetActive(true);
+        }
+
+        public void ShowAsNothingSpecial()
+        {
+            m_outline.gameObject.SetActive(false);
         }
     }
 }

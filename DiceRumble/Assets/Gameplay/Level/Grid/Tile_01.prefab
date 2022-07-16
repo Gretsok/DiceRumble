@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_gamePosition: {x: 0, y: 0}
-  m_outline: {fileID: 3970612213180910591}
+  m_outline: {fileID: 2666950862111087805}
 --- !u!65 &5520206587882210197
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -251,6 +251,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1607120029210755952}
+  - component: {fileID: 2666950862111087805}
   m_Layer: 0
   m_Name: SelectedWidget
   m_TagString: Untagged
@@ -277,6 +278,26 @@ Transform:
   m_Father: {fileID: 9053659976257596353}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2666950862111087805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3970612213180910591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cd3601532ea8ff4aa15325ea97d49c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_renderers:
+  - {fileID: 7595849385217016772}
+  - {fileID: 616293949792964789}
+  - {fileID: 1388636103422714472}
+  - {fileID: 2388712615110621851}
+  m_pathPossibleMat: {fileID: 2100000, guid: 2f71ee419b4525f45931b284717a6411, type: 2}
+  m_teamDiceMat: {fileID: 2100000, guid: 8596ec0c4dc6ac841ae55aaa2dce155c, type: 2}
+  m_selectedDiceMat: {fileID: 2100000, guid: 99d1c754f7148f9428129d245cc20446, type: 2}
 --- !u!1 &4242634653720675884
 GameObject:
   m_ObjectHideFlags: 0

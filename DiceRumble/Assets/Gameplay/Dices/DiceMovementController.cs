@@ -1,5 +1,6 @@
 ﻿using System;
 using DR.Gameplay.Level.Flow;
+using DR.Gameplay.Level.Grid;
 using MOtter;
 using MOtter.StatesMachine;
 using UnityEngine;
@@ -41,12 +42,25 @@ namespace DR.Gameplay.Dices
         public int RootStacks => m_rootStacks;
         public Vector2Int GamePosition { get; set; }
 
-        public Action<DiceMovementController> OnTileChanged = null;
+        public Action<DiceMovementController, Tile> OnTileChanged = null;
+
+        private Tile m_currentTile = null;
+        private Tile m_lastTile = null;
+        public Tile CurrentTile => m_currentTile;
+        public Tile LastTile => m_lastTile;
 
         private void Start()
         {
             m_animationsHandler.OnRollFinished += HandleRollFinished;
             SetTopFace();
+        }
+
+        public void ChangeTile(DiceMovementController arg1, Tile arg2)
+        {
+            if (arg1 != this) return;
+            m_lastTile = m_currentTile;
+            m_currentTile = arg2;
+            OnTileChanged?.Invoke(arg1, arg2);
         }
 
         private void OnDestroy()
