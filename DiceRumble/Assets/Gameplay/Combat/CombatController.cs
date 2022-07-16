@@ -31,6 +31,9 @@ namespace DR.Gameplay.Combat
         private Dice m_dice;
         public Dice Dice => m_dice;
 
+        public Action<CombatController> OnLifeUpdated = null;
+        public Action<CombatController, int> OnDamageTaken = null;
+
         private void Start()
         {
             m_dice = GetComponent<Dice>();
@@ -72,6 +75,8 @@ namespace DR.Gameplay.Combat
             m_currentHealth -= p_damage;
             if (m_currentHealth <= 0)
                 m_currentHealth = 0;
+            OnLifeUpdated?.Invoke(this);
+            OnDamageTaken?.Invoke(this, p_damage);
         }
         
         public int GetDamages()
@@ -179,6 +184,7 @@ namespace DR.Gameplay.Combat
         private void SetCurrentHealth(int p_currentHealth)
         {
             m_currentHealth = p_currentHealth;
+            OnLifeUpdated?.Invoke(this);
         }
     }
 }

@@ -29,6 +29,8 @@ namespace MOtter.Utils
             {
                 SetCamera(camera.transform);
             }
+            else
+                StartCoroutine(WaitForMainCamera());
         }
 
         public void SetCamera(Transform cameraTransform)
