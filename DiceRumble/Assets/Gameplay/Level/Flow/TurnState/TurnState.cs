@@ -30,7 +30,6 @@ namespace DR.Gameplay.Level.Flow
         {
             base.EnterState();
             m_movesDoneThisTurn = 0;
-            m_gamemode.TurnManager.SetTeamTurn((m_gamemode.TurnManager.TurnTeam + 1) % 2); 
         }
 
         private void HandleSelectStarted(InputAction.CallbackContext obj)
