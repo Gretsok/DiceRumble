@@ -1,3 +1,4 @@
+using System.Collections;
 using MOtter.StatesMachine;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ namespace DR.Gameplay.Level.Flow
         private int m_movesDoneThisTurn = 0;
         private Dices.Dice m_currentSelectedDice = null;
         private List<Grid.Tile> m_surroundingTiles = null;
+        private bool m_diceIsMoveing;
+        
         internal override void RegisterEvents()
         {
             base.RegisterEvents();
@@ -88,8 +91,26 @@ namespace DR.Gameplay.Level.Flow
             m_movesDoneThisTurn++;
             if(m_movesDoneThisTurn >= m_numberMaxOfMoves)
             {
-                m_gamemode.SwitchToNextState();
+                StartCoroutine(SwitchStateOnMoveComplete());
             }
+        }
+
+        IEnumerator SwitchStateOnMoveComplete()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(0.1f);
+                if (!m_diceIsMoveing)
+                {
+                    m_gamemode.SwitchToNextState();
+                    break;
+                }
+            }
+        }
+
+        public void SetDiceIsMoving(bool p_value)
+        {
+            m_diceIsMoveing = p_value;
         }
 
         private void EmptySurroundingTiles()

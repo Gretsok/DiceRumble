@@ -1,4 +1,7 @@
 ﻿using System;
+using DR.Gameplay.Level.Flow;
+using MOtter;
+using MOtter.StatesMachine;
 using UnityEngine;
 
 namespace DR.Gameplay.Dices
@@ -55,6 +58,7 @@ namespace DR.Gameplay.Dices
         {
             SetTopFace();
             m_canRoll = true;
+            InformStateAboutMovingDice(false);
         }
 
         private void SetTopFace()
@@ -76,6 +80,7 @@ namespace DR.Gameplay.Dices
             m_canRoll = false;
             GamePosition += Vector2Int.down;
             m_animationsHandler.TriggerRollForwardAnimations();
+            InformStateAboutMovingDice(true);
         }
 
         public void RollBackward()
@@ -84,6 +89,7 @@ namespace DR.Gameplay.Dices
             m_canRoll = false;
             GamePosition += Vector2Int.up;
             m_animationsHandler.TriggerRollBackwardAnimations();
+            InformStateAboutMovingDice(true);
         }
 
         public void RollLeftward()
@@ -92,6 +98,7 @@ namespace DR.Gameplay.Dices
             m_canRoll = false;
             GamePosition += Vector2Int.left;
             m_animationsHandler.TriggerRollLeftwardAnimations();
+            InformStateAboutMovingDice(true);
         }
 
         public void RollRightward()
@@ -100,6 +107,16 @@ namespace DR.Gameplay.Dices
             m_canRoll = false;
             GamePosition += Vector2Int.right;
             m_animationsHandler.TriggerRollRightwardAnimations();
+            InformStateAboutMovingDice(true);
+        }
+
+        private void InformStateAboutMovingDice(bool p_moving)
+        {
+            StateMonoBehaviour state = MOtt.GM.GetCurrentMainStateMachine<LevelGameMode>().GetCurrentState();
+            if (state && state.GetType() == typeof(TurnState))
+            {
+                ((TurnState)state).SetDiceIsMoving(p_moving);
+            }        
         }
 
         public void RemoveRootStack()

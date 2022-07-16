@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
 using DR.Gameplay.Dices;
 using DR.Gameplay.Dices.Manager;
 using DR.Gameplay.Level.Flow;
+using DR.Gameplay.Level.Grid;
 using MOtter.StatesMachine;
 using UnityEngine;
 
@@ -17,8 +19,7 @@ public class FightState : FlowState
         Debug.Log("EnterState : " + gameObject.name);
         m_askedForNextState = false;
         m_hasFinishedFighting = false;
-        m_hasFinishedFighting = true;
-
+        Fight();
     }
 
     public override void UpdateState()
@@ -44,5 +45,39 @@ public class FightState : FlowState
         }
         turnManager.ChangeTurn();
         Debug.Log("ExitState : " + gameObject.name);
+    }
+
+    private void Fight()
+    {
+        //Fight dices
+        List<Dice> teamDices = m_gamemode.TurnManager.TurnTeam == 0 ? m_gamemode.DicesManager.FirstTeamDices : m_gamemode.DicesManager.SecondTeamDices;
+        List<Dice> opponentDices = m_gamemode.TurnManager.TurnTeam == 1 ? m_gamemode.DicesManager.FirstTeamDices : m_gamemode.DicesManager.SecondTeamDices;
+        foreach (Dice dice in teamDices)
+        {
+            List<Tile> surroundingTiles = m_gamemode.Grid.GetSurroundingTiles(dice.DiceMovementController.GamePosition);
+            foreach (Tile tile in surroundingTiles)
+            {
+                if (tile.CurrentDice is not null && tile.CurrentDice.TeamIndex != dice.TeamIndex)
+                {
+                    Debug.Log(dice.gameObject.name + " attacks " + tile.CurrentDice.gameObject.name);
+                    dice.CombatController.Attack(tile.CurrentDice.CombatController);
+                }
+            }
+        }
+
+        //Check dead dices
+        foreach (Dice dice in teamDices)
+        {
+            if (dice.CombatController.CurrentHealth <= 0)
+                dice.CombatController.Die();
+        }
+        foreach (Dice dice in opponentDices)
+        {
+            if (dice.CombatController.CurrentHealth <= 0)
+                dice.CombatController.Die();
+        }
+        
+        //finish fight
+        m_hasFinishedFighting = true;
     }
 }

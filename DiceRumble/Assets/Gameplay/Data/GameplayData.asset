@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c601b5b3df4c714da29ee0b9aa31d51, type: 3}
   m_Name: GameplayData
   m_EditorClassIdentifier: 
-  HealAmount: 0
+  WaterHealAmount: 2
+  PoisonDamage: 1
+  FireDamagePerStack: 1
+  RockShieldPerStack: 1
+  PlantRootPerStack: 1
