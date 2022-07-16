@@ -50,8 +50,8 @@ namespace DR.MainMenu.TeamCreation
                 TeamChoices teamChoices;
                 teamChoices.MemberIndexes = new List<int>();
                 teamChoices.MemberIndexes.Add(0);
-                teamChoices.MemberIndexes.Add(0);
-                teamChoices.MemberIndexes.Add(0);
+                teamChoices.MemberIndexes.Add(1);
+                teamChoices.MemberIndexes.Add(2);
                 m_teamChoices.Add(teamChoices);
             }
             PopulateWidgets();
@@ -95,22 +95,22 @@ namespace DR.MainMenu.TeamCreation
 
         private void HandleDownArrowClicked(TeamCreationWidget arg0, int arg1)
         {
-            if(arg0 == m_panel.FirstTeamCreationWidget)
+            int teamIndex = arg0 == m_panel.FirstTeamCreationWidget ? 0 : 1;
+            // Debug.Log($"Press down arrow of member {arg1 + 1} of first team");
+            for (int i = 1; i <= 3; i++)
             {
-                // Debug.Log($"Press down arrow of member {arg1 + 1} of first team");
-                m_teamChoices[0].MemberIndexes[arg1]--;
-                if(m_teamChoices[0].MemberIndexes[arg1] < 0)
+                if (m_teamChoices[teamIndex].MemberIndexes[arg1] - i < 0)
                 {
-                    m_teamChoices[0].MemberIndexes[arg1] = m_availableDicesData.AvailableDicesList.Count - 1;
+                    if (!m_teamChoices[teamIndex].MemberIndexes.Contains(m_availableDicesData.AvailableDicesList.Count + (m_teamChoices[teamIndex].MemberIndexes[arg1] - i)))
+                    {
+                        m_teamChoices[teamIndex].MemberIndexes[arg1] = m_availableDicesData.AvailableDicesList.Count + (m_teamChoices[teamIndex].MemberIndexes[arg1] - i);
+                        break;
+                    }
                 }
-            }
-            else if(arg0 == m_panel.SecondTeamCreationWidget)
-            {
-                // Debug.Log($"Press down arrow of member {arg1 + 1} of second team");
-                m_teamChoices[1].MemberIndexes[arg1]--;
-                if (m_teamChoices[1].MemberIndexes[arg1] < 0)
+                else if (!m_teamChoices[teamIndex].MemberIndexes.Contains(m_teamChoices[teamIndex].MemberIndexes[arg1] - i))
                 {
-                    m_teamChoices[1].MemberIndexes[arg1] = m_availableDicesData.AvailableDicesList.Count - 1;
+                    m_teamChoices[teamIndex].MemberIndexes[arg1] -= i;
+                    break;
                 }
             }
             PopulateWidgets();
@@ -118,17 +118,23 @@ namespace DR.MainMenu.TeamCreation
 
         private void HandleUpArrowClicked(TeamCreationWidget arg0, int arg1)
         {
-            if (arg0 == m_panel.FirstTeamCreationWidget)
+            int teamIndex = arg0 == m_panel.FirstTeamCreationWidget ? 0 : 1;
+            // Debug.Log($"Press down arrow of member {arg1 + 1} of first team");
+            for (int i = 1; i <= 3; i++)
             {
-                // Debug.Log($"Press up arrow of member {arg1 + 1} of first team");
-                m_teamChoices[0].MemberIndexes[arg1]++;
-                m_teamChoices[0].MemberIndexes[arg1] = m_teamChoices[0].MemberIndexes[arg1] % m_availableDicesData.AvailableDicesList.Count;
-            }
-            else if (arg0 == m_panel.SecondTeamCreationWidget)
-            {
-                // Debug.Log($"Press up arrow of member {arg1 + 1} of second team");
-                m_teamChoices[1].MemberIndexes[arg1]++;
-                m_teamChoices[1].MemberIndexes[arg1] = m_teamChoices[1].MemberIndexes[arg1] % m_availableDicesData.AvailableDicesList.Count;
+                if (m_teamChoices[teamIndex].MemberIndexes[arg1] + i >= m_availableDicesData.AvailableDicesList.Count)
+                {
+                    if (!m_teamChoices[teamIndex].MemberIndexes.Contains(m_teamChoices[teamIndex].MemberIndexes[arg1] + i - m_availableDicesData.AvailableDicesList.Count))
+                    {
+                        m_teamChoices[teamIndex].MemberIndexes[arg1] = m_teamChoices[teamIndex].MemberIndexes[arg1] + i - m_availableDicesData.AvailableDicesList.Count;
+                        break;
+                    }
+                }
+                else if (!m_teamChoices[teamIndex].MemberIndexes.Contains(m_teamChoices[teamIndex].MemberIndexes[arg1] + i))
+                {
+                    m_teamChoices[teamIndex].MemberIndexes[arg1] += i;
+                    break;
+                }
             }
             PopulateWidgets();
         }
