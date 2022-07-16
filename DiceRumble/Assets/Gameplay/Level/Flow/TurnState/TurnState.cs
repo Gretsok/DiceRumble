@@ -30,7 +30,19 @@ namespace DR.Gameplay.Level.Flow.TurnState
             base.SetUpDependencies();
             m_panel.ShowTeamToPlay(m_gamemode.TurnManager.TurnTeam == 0);
             m_panel.ShowMovementLeft(m_numberMaxOfMoves);
+            m_currentSelectedDice = null;
             DisplayOutlines();
+
+            if (m_gamemode.TurnManager.TurnTeam == 0)
+            {
+                m_gamemode.DicesManager.FirstTeamDices.ForEach(x => x.GetComponent<Dices.DiceMovementController>().ResetLastTile());
+            }
+            else
+            {
+                m_gamemode.DicesManager.SecondTeamDices.ForEach(x => x.GetComponent<Dices.DiceMovementController>().ResetLastTile());
+            }
+
+
         }
 
         internal override void RegisterEvents()
