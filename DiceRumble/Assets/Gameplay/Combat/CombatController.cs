@@ -76,8 +76,6 @@ namespace DR.Gameplay.Combat
         
         public int GetDamages()
         {
-            Debug.Log(gameObject.name + " dmg : " + (int)m_dice.DiceMovementController.DiceTopFace + 1);
-            Debug.Log(m_dice.DiceMovementController.DiceTopFace);
             return (int)m_dice.DiceMovementController.DiceTopFace + 1;
         }
 
