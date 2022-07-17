@@ -53,12 +53,13 @@ namespace DR.Gameplay.Dices.Animations.Extras.Rotation
 
         private IEnumerator ChangingLookRoutine(Vector3 a_targettedForward)
         {
-            Vector3 startingForward = transform.forward;
+            Quaternion startingRotation = Quaternion.LookRotation(transform.forward, Vector3.up);
+            Quaternion targettedRotation = Quaternion.LookRotation(a_targettedForward, Vector3.up);
             float durationToChange = 0.5f;
             float timeOfStart = Time.time;
             while(Time.time - timeOfStart < durationToChange)
             {
-                transform.forward = Vector3.Lerp(startingForward, a_targettedForward, (Time.time - timeOfStart) / durationToChange);
+                transform.rotation = Quaternion.Slerp(startingRotation, targettedRotation, (Time.time - timeOfStart) / durationToChange);
                 yield return null;
             }
             transform.forward = a_targettedForward;
