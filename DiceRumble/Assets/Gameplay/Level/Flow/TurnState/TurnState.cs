@@ -110,7 +110,9 @@ namespace DR.Gameplay.Level.Flow.TurnState
                             m_currentSelectedDice = null;
                             MOtter.MOtt.SOUND.Play2DSound(m_selectionSoundData);
                     }
-                    else if(l_tile.CurrentDice != null)
+                    else if(l_tile.CurrentDice != null
+                         && ((m_gamemode.TurnManager.TurnTeam == 0 && m_gamemode.DicesManager.FirstTeamDices.Contains(l_tile.CurrentDice))
+                        || (m_gamemode.TurnManager.TurnTeam == 1 && m_gamemode.DicesManager.SecondTeamDices.Contains(l_tile.CurrentDice))))
                     {
                         m_currentSelectedDice = l_tile.CurrentDice;
                         MOtter.MOtt.SOUND.Play2DSound(m_selectionSoundData);

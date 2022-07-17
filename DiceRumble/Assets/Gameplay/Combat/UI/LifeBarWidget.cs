@@ -13,10 +13,6 @@ namespace DR.Gameplay.Combat.UI
         [SerializeField] private Image m_healthBarBackground = null;
         [SerializeField] private RawImage m_healthTextBackground = null;
         [SerializeField] private TextMeshProUGUI m_healthText;
-        [SerializeField] private Color m_firstTeamHealthBarColor;
-        [SerializeField] private Color m_firstTeamHealthTextBackgroundColor;
-        [SerializeField] private Color m_secondTeamHealthBarColor;
-        [SerializeField] private Color m_secondTeamHealthTextBackgroundColor;
 
         private void Start()
         {
@@ -26,8 +22,12 @@ namespace DR.Gameplay.Combat.UI
 
         public void SetupTeamColor(int p_teamIndex)
         {
-            m_healthBarBackground.color = p_teamIndex == 0 ? m_firstTeamHealthBarColor : m_secondTeamHealthBarColor;
-            m_healthTextBackground.color = p_teamIndex == 0 ? m_firstTeamHealthTextBackgroundColor : m_secondTeamHealthTextBackgroundColor;
+            m_healthBarBackground.color = p_teamIndex == 0 ? 
+                (MOtter.MOtt.GM as DRGameManager).GlobalGameData.FirstTeamData.TeamColor 
+                : (MOtter.MOtt.GM as DRGameManager).GlobalGameData.SecondTeamData.TeamColor;
+            m_healthTextBackground.color = p_teamIndex == 0 ?
+                (MOtter.MOtt.GM as DRGameManager).GlobalGameData.FirstTeamData.TeamColor
+                : (MOtter.MOtt.GM as DRGameManager).GlobalGameData.SecondTeamData.TeamColor;
         }
 
         private void HandleLifeUpdated(CombatController obj)
