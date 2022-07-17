@@ -221,11 +221,33 @@
                 },
                 {
                     "name": "",
+                    "id": "e3aef72b-5aad-44a9-af94-8d635706d5fd",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "5c170c68-3c42-4d56-b0b5-30242a08f4d0",
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "MouseAndKeyboard",
+                    "action": "CursorPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0448e12d-f702-49d4-b7a8-aee25b2ce4a2",
+                    "path": "<Touchscreen>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "CursorPosition",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -285,6 +307,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "MouseAndKeyboard",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "de10ec49-739e-4a4d-b99f-46820f20c56d",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false

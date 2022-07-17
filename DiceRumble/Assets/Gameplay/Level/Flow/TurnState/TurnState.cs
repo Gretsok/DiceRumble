@@ -86,6 +86,7 @@ namespace DR.Gameplay.Level.Flow.TurnState
         private void HandleSelectStarted(InputAction.CallbackContext obj)
         {
             if (m_diceIsMoving) return;
+            Vector3 mousePos = MOtter.MOtt.PLAYERS.GetActions(0).FindActionMap("MainMenu").FindAction("CursorPosition").ReadValue<Vector2>();
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if(Physics.Raycast(ray, out RaycastHit l_hitInfo))
             {
