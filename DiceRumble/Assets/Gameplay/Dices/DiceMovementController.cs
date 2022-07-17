@@ -153,8 +153,10 @@ namespace DR.Gameplay.Dices
 
         public void RemoveRootStack()
         {
-            if(m_rootStacks > 0)
+            if (m_rootStacks > 0)
+            {
                 m_rootStacks--;
+            }
         }
 
         public void ApplyRoot(int p_stacks)

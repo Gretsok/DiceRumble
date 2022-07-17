@@ -215,6 +215,7 @@ MonoBehaviour:
   m_pathPossibleMat: {fileID: 2100000, guid: 2f71ee419b4525f45931b284717a6411, type: 2}
   m_teamDiceMat: {fileID: 2100000, guid: 8596ec0c4dc6ac841ae55aaa2dce155c, type: 2}
   m_selectedDiceMat: {fileID: 2100000, guid: 99d1c754f7148f9428129d245cc20446, type: 2}
+  m_rootDiceMat: {fileID: 2100000, guid: 5fd2ca93ebb18b1449500329823638f3, type: 2}
 --- !u!1 &4242634653720675884
 GameObject:
   m_ObjectHideFlags: 0

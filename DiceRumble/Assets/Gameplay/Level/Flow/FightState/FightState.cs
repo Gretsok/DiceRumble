@@ -35,8 +35,8 @@ namespace DR.Gameplay.Level.Flow.FightState
             base.UpdateState();
             if (m_hasFinishedFighting && !m_askedForNextState)
             {
-                m_gamemode.SwitchToNextState();
                 m_askedForNextState = true;
+                m_gamemode.SwitchToNextState();
             }
         }
 
@@ -57,9 +57,17 @@ namespace DR.Gameplay.Level.Flow.FightState
 
         private IEnumerator Fight()
         {
-            //Fight dices
             List<Dice> teamDices = m_gamemode.TurnManager.TurnTeam == 0 ? m_gamemode.DicesManager.FirstTeamDices : m_gamemode.DicesManager.SecondTeamDices;
             List<Dice> opponentDices = m_gamemode.TurnManager.TurnTeam == 1 ? m_gamemode.DicesManager.FirstTeamDices : m_gamemode.DicesManager.SecondTeamDices;
+            //Active powers
+            foreach (Dice dice in teamDices)
+            {
+                if (dice.CombatController.GetDamages() == 6)
+                {
+                    dice.CombatController.UsePower();
+                }
+            }
+            //Fight dices
             foreach (Dice dice in teamDices)
             {
                 List<Tile> surroundingTiles = m_gamemode.Grid.GetSurroundingTiles(dice.DiceMovementController.GamePosition);
@@ -93,8 +101,7 @@ namespace DR.Gameplay.Level.Flow.FightState
                     MOtter.MOtt.SOUND.Play2DSound(m_deathSoundData);
                 }
             }
-
-
+            
             //finish fight
             m_hasFinishedFighting = true;
         }
