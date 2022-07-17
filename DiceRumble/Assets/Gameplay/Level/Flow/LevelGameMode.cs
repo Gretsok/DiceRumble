@@ -1,3 +1,4 @@
+using MOtter.SoundManagement;
 using MOtter.StatesMachine;
 using System.Collections;
 using UnityEngine;
@@ -25,6 +26,10 @@ namespace DR.Gameplay.Level.Flow
         [SerializeField]
         private FlowState m_endState = null;
 
+        [SerializeField]
+        private SoundData m_musicData = null;
+        private AudioSource m_musicSource = null;
+
         public override IEnumerator LoadAsync()
         {
             while(m_grid == null)
@@ -40,6 +45,27 @@ namespace DR.Gameplay.Level.Flow
             m_dicesManager.OnTeamEliminated += HandleTeamEliminated;
 
             yield return StartCoroutine(base.LoadAsync());
+        }
+
+        internal override void EnterStateMachine()
+        {
+            base.EnterStateMachine();
+            m_musicSource = MOtter.MOtt.SOUND.Play2DSound(m_musicData, true);
+        }
+
+        internal override void ExitStateMachine()
+        {
+            base.ExitStateMachine();
+            StopMusics();
+        }
+
+        public void StopMusics()
+        {
+            if (m_musicSource != null)
+            {
+                m_musicSource.Stop();
+                m_musicSource = null;
+            }
         }
 
         private void HandleTeamEliminated()

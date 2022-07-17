@@ -228,6 +228,7 @@ MonoBehaviour:
   m_gamemode: {fileID: 324146160}
   m_levelData: {fileID: 11400000, guid: b31c9f259b641af4e9a37f14d8bb7834, type: 2}
   m_stateDuration: 6
+  m_endJingle: {fileID: 11400000, guid: ed9f8037e5fffa84e9afcb7f96f64fd6, type: 2}
 --- !u!1 &243710098
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,6 +307,7 @@ MonoBehaviour:
   m_turnManager: {fileID: 1314489178}
   m_gameplayData: {fileID: 11400000, guid: 7383dbd4e3dd9044eb659f4b2c27b4ff, type: 2}
   m_endState: {fileID: 191622409}
+  m_musicData: {fileID: 11400000, guid: c090921a0cca3114b8494a67679eaf69, type: 2}
 --- !u!4 &324146161
 Transform:
   m_ObjectHideFlags: 0

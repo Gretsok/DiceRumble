@@ -16,4 +16,4 @@ MonoBehaviour:
   m_dicePreviewIcon: {fileID: 21300000, guid: e7d574a8be236a54aa951110d995bf68, type: 3}
   m_dicePrefab: {fileID: 2895070034888972931, guid: d15ce14ae5a047341988b5e16bff52cb,
     type: 3}
-  m_diceHealth: 13
+  m_diceHealth: 26

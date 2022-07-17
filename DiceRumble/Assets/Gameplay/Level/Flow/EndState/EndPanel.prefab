@@ -362,7 +362,7 @@ MonoBehaviour:
       m_Calls: []
   m_onStartingType: 1
   m_tweenDuration: 2
-  m_loopType: 2
+  m_loopType: 3
   m_tweenCurve:
     serializedVersion: 2
     m_Curve:

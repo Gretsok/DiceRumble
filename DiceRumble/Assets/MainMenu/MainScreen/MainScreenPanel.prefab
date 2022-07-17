@@ -352,6 +352,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: CreditsButton
       objectReference: {fileID: 0}
+    - target: {fileID: 8084659656622916743, guid: 2a5639c00915ece4ca554636cfc4c0da,
+        type: 3}
+      propertyPath: m_submittedSound
+      value: 
+      objectReference: {fileID: 11400000, guid: b55ff0367edfad8459a4eb3af3db7ee1,
+        type: 2}
     - target: {fileID: 8610568207334241160, guid: 2a5639c00915ece4ca554636cfc4c0da,
         type: 3}
       propertyPath: m_Pivot.x

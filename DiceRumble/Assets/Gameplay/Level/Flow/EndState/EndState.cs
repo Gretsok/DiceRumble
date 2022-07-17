@@ -1,4 +1,5 @@
 using MOtter.LevelData;
+using MOtter.SoundManagement;
 using MOtter.StatesMachine;
 using UnityEngine;
 
@@ -15,6 +16,8 @@ namespace DR.Gameplay.Level.Flow.EndState
         private float m_stateDuration = 6f;
         private float m_timeOfStart = float.MaxValue;
         private bool m_hasStartedLoadingMenu = false;
+        [SerializeField]
+        private SoundData m_endJingle = null;
 
         internal override void RegisterReferences()
         {
@@ -40,6 +43,8 @@ namespace DR.Gameplay.Level.Flow.EndState
         {
             base.EnterState();
             m_timeOfStart = Time.time;
+            m_gamemode.StopMusics();
+            MOtter.MOtt.SOUND.Play2DSound(m_endJingle);
         }
 
         public override void UpdateState()
