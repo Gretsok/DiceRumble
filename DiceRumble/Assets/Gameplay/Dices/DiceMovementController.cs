@@ -54,6 +54,9 @@ namespace DR.Gameplay.Dices
         public Tile CurrentTile => m_currentTile;
         public Tile LastTile => m_lastTile;
 
+        [SerializeField]
+        private MOtter.SoundManagement.SoundData m_diceSetDownOnBoard = null;
+
         private void Start()
         {
             m_animationsHandler.OnRollFinished += HandleRollFinished;
@@ -83,6 +86,7 @@ namespace DR.Gameplay.Dices
             SetTopFace();
             m_canRoll = true;
             InformStateAboutMovingDice(false);
+            MOtt.SOUND.Play2DSound(m_diceSetDownOnBoard);
         }
 
         private void SetTopFace()

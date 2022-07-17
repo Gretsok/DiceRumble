@@ -87,6 +87,8 @@ GameObject:
   - component: {fileID: 7014402158699368890}
   - component: {fileID: 893484529821425814}
   - component: {fileID: 929096555003957187}
+  - component: {fileID: 4618320752864769755}
+  - component: {fileID: 329665723468609394}
   m_Layer: 5
   m_Name: TeamMemberSelectionButton
   m_TagString: Untagged
@@ -167,3 +169,62 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4618320752864769755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7895515901023407236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 329665723468609394}
+          m_TargetAssemblyTypeName: DR.Utils.SoundNavigationButtonHandler, Assembly-CSharp
+          m_MethodName: HandleButtonSelected
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 15
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 329665723468609394}
+          m_TargetAssemblyTypeName: DR.Utils.SoundNavigationButtonHandler, Assembly-CSharp
+          m_MethodName: HandleButtonSubmitted
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &329665723468609394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7895515901023407236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40300eea452a3bd48aef2828848258ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_selectedSound: {fileID: 11400000, guid: b6de03adaf094c1439f1f3dfb71819b1, type: 2}
+  m_submittedSound: {fileID: 11400000, guid: 856d99856abbeac4d9de775f910d2817, type: 2}

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b82c3bff4a60e489c0ae6417778edf, type: 3}
+  m_Name: DiceSetDownSoundData
+  m_EditorClassIdentifier: 
+  m_audioClips:
+  - {fileID: 8300000, guid: 3ec155e690cb8c24cb898ca552aa0463, type: 3}
+  - {fileID: 8300000, guid: 2599da48d9fa13c4da429cb7c8213d30, type: 3}
+  m_categoryName: 1

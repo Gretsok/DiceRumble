@@ -161,6 +161,8 @@ MonoBehaviour:
   m_nextState: {fileID: 1343212579}
   m_panels: []
   m_gamemode: {fileID: 324146160}
+  m_punchSoundData: {fileID: 11400000, guid: 56b2b1024ab7db74aa07693403d8c42b, type: 2}
+  m_deathSoundData: {fileID: 11400000, guid: 518bf5f71216b324cadca921b0e5aa3b, type: 2}
 --- !u!4 &154638321
 Transform:
   m_ObjectHideFlags: 0
@@ -467,6 +469,8 @@ MonoBehaviour:
   - {fileID: 923175087}
   m_gamemode: {fileID: 324146160}
   m_numberMaxOfMoves: 5
+  m_selectionSoundData: {fileID: 11400000, guid: aef6e1bafe2ae494a8b1f070d8d95aef,
+    type: 2}
 --- !u!4 &1343212580
 Transform:
   m_ObjectHideFlags: 0

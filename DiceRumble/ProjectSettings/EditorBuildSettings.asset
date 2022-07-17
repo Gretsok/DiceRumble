@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Gameplay/Level/Level_01/Enviro_01.unity
     guid: 811cd75d48cd4b246989ad125485be82
+  - enabled: 1
+    path: Assets/MainMenu/Enviro/Menu_Enviro.unity
+    guid: 061a427b7d6440149aecdbb5963b0b68
   m_configObjects: {}
