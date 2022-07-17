@@ -16,7 +16,9 @@ MonoBehaviour:
   m_mainScene:
     m_SceneAsset: {fileID: 102900000, guid: e3a0faf38509ddb4a9acc794e2c705db, type: 3}
     m_SceneName: MainMenu
-  m_additionalScenes: []
+  m_additionalScenes:
+  - m_SceneAsset: {fileID: 102900000, guid: 061a427b7d6440149aecdbb5963b0b68, type: 3}
+    m_SceneName: Menu_Enviro
   m_loadingScreen:
     m_SceneAsset: {fileID: 0}
     m_SceneName: 
