@@ -111,20 +111,20 @@ MonoBehaviour:
   m_XRTrackingOrigin: {fileID: 0}
   m_ActionsAsset: {fileID: -944628639613478452, guid: d30ee9149a50a0541a33393d71565c40,
     type: 3}
-  m_PointAction: {fileID: 0}
-  m_MoveAction: {fileID: 952670849197049523, guid: d30ee9149a50a0541a33393d71565c40,
+  m_PointAction: {fileID: 3498756911556218858, guid: d30ee9149a50a0541a33393d71565c40,
     type: 3}
-  m_SubmitAction: {fileID: -4236296060454475266, guid: d30ee9149a50a0541a33393d71565c40,
-    type: 3}
+  m_MoveAction: {fileID: 0}
+  m_SubmitAction: {fileID: 0}
   m_CancelAction: {fileID: 0}
-  m_LeftClickAction: {fileID: 0}
+  m_LeftClickAction: {fileID: -4236296060454475266, guid: d30ee9149a50a0541a33393d71565c40,
+    type: 3}
   m_MiddleClickAction: {fileID: 0}
   m_RightClickAction: {fileID: 0}
   m_ScrollWheelAction: {fileID: 0}
   m_TrackedDevicePositionAction: {fileID: 0}
   m_TrackedDeviceOrientationAction: {fileID: 0}
   m_DeselectOnBackgroundClick: 1
-  m_PointerBehavior: 0
+  m_PointerBehavior: 2
 --- !u!1 &7108454201593117159
 GameObject:
   m_ObjectHideFlags: 0

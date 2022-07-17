@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 332271acfa4773d42a80ac8f53bac2fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_defaultSelectedObject: {fileID: 6194112667051510291}
+  m_defaultSelectedObject: {fileID: 0}
   m_firstTeamCreationWidget: {fileID: 4824563958827050699}
   m_secondTeamCreationWidget: {fileID: 5766305627982899343}
   m_startGameButton: {fileID: 6182129388162223088}
@@ -479,12 +479,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ac50b95ab79f84899d00338916dd26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &6194112667051510291 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 428933564525888939, guid: c74af9d4d3e368348994b8b37e482ad0,
-    type: 3}
-  m_PrefabInstance: {fileID: 5766305627669565368}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5833988856010431987
 PrefabInstance:
   m_ObjectHideFlags: 0
