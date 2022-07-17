@@ -43,7 +43,7 @@ namespace DR.Gameplay.Dices
         public void Init(int p_diceHealth, int p_teamIndex)
         {
             m_teamIndex = p_teamIndex;
-            m_combatController.Init(p_diceHealth);
+            m_combatController.Init(p_diceHealth, p_teamIndex);
         }
 
         public void EndTurnUpdates()

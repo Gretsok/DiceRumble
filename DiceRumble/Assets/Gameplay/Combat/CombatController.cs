@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DR.Gameplay.Combat.UI;
 using DR.Gameplay.Dices;
 using DR.Gameplay.Dices.Manager;
 using DR.Gameplay.Level.Flow;
@@ -12,6 +13,7 @@ namespace DR.Gameplay.Combat
     public class CombatController : MonoBehaviour
     {
         [SerializeField] private StatusIconsManager m_statusIconsManager;
+        [SerializeField] private LifeBarWidget m_lifeBarWidget;
         public StatusIconsManager StatusIconsManager => m_statusIconsManager;
         
         private int m_baseHealth;
@@ -91,10 +93,11 @@ namespace DR.Gameplay.Combat
             return (int)m_dice.DiceMovementController.DiceTopFace + 1;
         }
 
-        public void Init(int p_diceHealth)
+        public void Init(int p_diceHealth, int p_teamIndex)
         {
             SetBaseHealth(p_diceHealth);
             SetCurrentHealth(p_diceHealth);
+            m_lifeBarWidget.SetupTeamColor(p_teamIndex);
         }
 
         public void Heal(int p_amount)
