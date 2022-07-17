@@ -30,8 +30,8 @@ namespace DR.Gameplay.Level.Flow.FightState
             base.UpdateState();
             if (m_hasFinishedFighting && !m_askedForNextState)
             {
-                m_gamemode.SwitchToNextState();
                 m_askedForNextState = true;
+                m_gamemode.SwitchToNextState();
             }
         }
 
