@@ -1,4 +1,5 @@
 using MOtter.LevelData;
+using MOtter.SoundManagement;
 using MOtter.StatesMachine;
 using System.Collections.Generic;
 using UnityEngine;
@@ -83,7 +84,6 @@ namespace DR.MainMenu.TeamCreation
                 teamsDataConveyor.SecondTeamDicesData.Add(m_availableDicesData.AvailableDicesList[m_teamChoices[1].MemberIndexes[i]]);
             }
             MOtter.MOtt.DATACONVEY.RegisterContainer(teamsDataConveyor);
-
             m_gameLevelData.LoadLevel();
             m_hasLaunchedTheGame = true;
         }

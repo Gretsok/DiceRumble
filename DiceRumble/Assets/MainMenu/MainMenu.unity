@@ -323,6 +323,7 @@ MonoBehaviour:
   m_gameLevelData: {fileID: 11400000, guid: 1f47afa59a852fc41997a2a9beb2f93d, type: 2}
   m_availableDicesData: {fileID: 11400000, guid: 5626c3ce3291721479121142cf94eff8,
     type: 2}
+  m_startGameSound: {fileID: 11400000, guid: b4cdbebaf271e664299b89e854b980f0, type: 2}
 --- !u!1 &1543599464
 GameObject:
   m_ObjectHideFlags: 0
