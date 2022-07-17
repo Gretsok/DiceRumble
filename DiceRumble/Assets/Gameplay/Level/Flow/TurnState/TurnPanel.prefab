@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -714, y: -292}
-  m_SizeDelta: {x: 1382.3936, y: 134.7653}
+  m_AnchoredPosition: {x: -500, y: -100}
+  m_SizeDelta: {x: 1000, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3048362252525390362
 CanvasRenderer:
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -190,7 +190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_firstTeamPlayingContainer: {fileID: 4815799338501619927}
   m_secondTeamPlayingContainer: {fileID: 757659394768510822}
-  m_durationToShowTeam: 4
+  m_durationToShowTeam: 2.5
   m_movementLeft: {fileID: 6069131169388152595}
 --- !u!1001 &1917136752039485762
 PrefabInstance:
@@ -330,6 +330,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5966585028414799163}
     m_Modifications:
+    - target: {fileID: 556604180387654937, guid: 9ec8fe363362de14193d06e9d7475f2d,
+        type: 3}
+      propertyPath: m_isFirstTeam
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1019362690776940261, guid: 9ec8fe363362de14193d06e9d7475f2d,
         type: 3}
       propertyPath: m_Pivot.x
