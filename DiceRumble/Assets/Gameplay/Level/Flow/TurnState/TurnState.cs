@@ -3,6 +3,7 @@ using MOtter.StatesMachine;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using MOtter.SoundManagement;
 
 namespace DR.Gameplay.Level.Flow.TurnState
 {
@@ -18,6 +19,9 @@ namespace DR.Gameplay.Level.Flow.TurnState
         private bool m_diceIsMoveing;
 
         private TurnPanel m_panel = null;
+
+        [SerializeField]
+        private SoundData m_selectionSoundData = null;
 
         internal override void RegisterReferences()
         {
@@ -83,6 +87,7 @@ namespace DR.Gameplay.Level.Flow.TurnState
                         || (m_gamemode.TurnManager.TurnTeam == 1 && m_gamemode.DicesManager.SecondTeamDices.Contains(l_dice.Dice))))
                 {
                     m_currentSelectedDice = l_dice.Dice;
+                    MOtter.MOtt.SOUND.Play2DSound(m_selectionSoundData);
                 }
                 else if(l_hitInfo.collider.TryGetComponent(out Grid.Tile l_tile))
                 {
@@ -94,10 +99,12 @@ namespace DR.Gameplay.Level.Flow.TurnState
                     {         
                             MoveDiceToTile(l_tile);
                             m_currentSelectedDice = null;
+                            MOtter.MOtt.SOUND.Play2DSound(m_selectionSoundData);
                     }
                     else if(l_tile.CurrentDice != null)
                     {
                         m_currentSelectedDice = l_tile.CurrentDice;
+                        MOtter.MOtt.SOUND.Play2DSound(m_selectionSoundData);
                     }
                 }
             }

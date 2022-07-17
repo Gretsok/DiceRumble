@@ -471,6 +471,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   m_extrasRotationBrain: {fileID: 984420633414177076}
+  m_diceSetDownOnBoard: {fileID: 11400000, guid: 325383ff42d2a6b498882aeac5ebabde,
+    type: 2}
 --- !u!114 &7961841417974848064
 MonoBehaviour:
   m_ObjectHideFlags: 0

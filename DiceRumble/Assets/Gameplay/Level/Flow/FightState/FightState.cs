@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.ExceptionServices;
 using DR.Gameplay.Dices;
 using DR.Gameplay.Dices.Manager;
-using DR.Gameplay.Level.Flow;
 using DR.Gameplay.Level.Grid;
+using MOtter.SoundManagement;
 using MOtter.StatesMachine;
 using UnityEngine;
 
@@ -16,6 +15,12 @@ namespace DR.Gameplay.Level.Flow.FightState
         private LevelGameMode m_gamemode = null;
         private bool m_hasFinishedFighting = false;
         private bool m_askedForNextState = false;
+
+        [SerializeField]
+        private SoundData m_punchSoundData = null;
+        [SerializeField]
+        private SoundData m_deathSoundData = null;
+
         public override void EnterState()
         {
             base.EnterState();
@@ -62,9 +67,11 @@ namespace DR.Gameplay.Level.Flow.FightState
                 {
                     if (tile.CurrentDice is not null && tile.CurrentDice.TeamIndex != dice.TeamIndex)
                     {
+                        yield return new WaitForSeconds(0.5f);
                         Debug.Log(dice.gameObject.name + " attacks " + tile.CurrentDice.gameObject.name);
                         dice.CombatController.Attack(tile.CurrentDice.CombatController);
-                        yield return new WaitForSeconds(0.7f);
+                        MOtter.MOtt.SOUND.Play2DSound(m_punchSoundData);
+                        yield return new WaitForSeconds(0.5f);
                     }
                 }
             }
@@ -73,12 +80,18 @@ namespace DR.Gameplay.Level.Flow.FightState
             for(int i = teamDices.Count - 1; i >= 0; --i)
             {
                 if (teamDices[i].CombatController.CurrentHealth <= 0)
+                {
                     teamDices[i].CombatController.Die();
+                    MOtter.MOtt.SOUND.Play2DSound(m_deathSoundData);
+                }
             }
             for (int i = opponentDices.Count - 1; i >= 0; --i)
             {
                 if (opponentDices[i].CombatController.CurrentHealth <= 0)
+                {
                     opponentDices[i].CombatController.Die();
+                    MOtter.MOtt.SOUND.Play2DSound(m_deathSoundData);
+                }
             }
 
 
