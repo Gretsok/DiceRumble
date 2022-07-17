@@ -1,3 +1,4 @@
+using DR.Gameplay.Dices;
 using UnityEngine;
 
 namespace DR.Gameplay.Combat.UI
@@ -19,16 +20,16 @@ namespace DR.Gameplay.Combat.UI
             m_combatController.OnDamageTaken -= HandleDamageTaken;
         }
 
-        private void HandleDamageTaken(CombatController arg1, int arg2)
+        private void HandleDamageTaken(CombatController arg1, int arg2, EDiceType p_damageType)
         {
-            ShowHit(arg2);
+            ShowHit(arg2, p_damageType);
         }
 
-        public void ShowHit(int a_damage)
+        public void ShowHit(int a_damage, EDiceType p_damageType)
         {
             var newHit = Instantiate(m_hitPrefab, transform);
             newHit.transform.localPosition = Vector3.zero;
-            newHit.Inflate(a_damage);
+            newHit.Inflate(a_damage, p_damageType);
         }
     }
 }

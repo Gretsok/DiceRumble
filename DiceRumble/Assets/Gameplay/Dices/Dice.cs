@@ -50,6 +50,7 @@ namespace DR.Gameplay.Dices
         {
             m_combatController.ResetUsedPowers();
             m_diceMovementController.RemoveRootStack();
+            CombatController.StatusIconsManager.RemoveStatusStack(StatusIconsManager.Status.Root, 1, false);
         }
 
         public void InflateArmsColors(Color a_armsColor)

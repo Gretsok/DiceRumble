@@ -11,6 +11,9 @@ namespace DR.Gameplay.Combat
     [RequireComponent(typeof(Dice))]
     public class CombatController : MonoBehaviour
     {
+        [SerializeField] private StatusIconsManager m_statusIconsManager;
+        public StatusIconsManager StatusIconsManager => m_statusIconsManager;
+        
         private int m_baseHealth;
         public int BaseHealth => m_baseHealth;
         private int m_currentHealth;
@@ -32,7 +35,7 @@ namespace DR.Gameplay.Combat
         public Dice Dice => m_dice;
 
         public Action<CombatController> OnLifeUpdated = null;
-        public Action<CombatController, int> OnDamageTaken = null;
+        public Action<CombatController, int, EDiceType> OnDamageTaken = null;
 
         private void Start()
         {
@@ -63,18 +66,24 @@ namespace DR.Gameplay.Combat
             }
         }
 
-        public void TakeDamage(int p_damage, EDiceType p_diceType)
+        public void TakeDamage(int p_damage, EDiceType p_damageType)
         {
+            int shieldLost = 0;
             while (m_shield > 0 && p_damage > 0)
             {
                 m_shield--;
                 p_damage--;
+                shieldLost++;
             }
             m_currentHealth -= p_damage;
             if (m_currentHealth <= 0)
                 m_currentHealth = 0;
             OnLifeUpdated?.Invoke(this);
-            OnDamageTaken?.Invoke(this, p_damage);
+            OnDamageTaken?.Invoke(this, p_damage, p_damageType);
+            if (shieldLost > 0)
+            {
+                StatusIconsManager.RemoveStatusStack(StatusIconsManager.Status.Shield, shieldLost, false);
+            }
         }
         
         public int GetDamages()
@@ -104,11 +113,13 @@ namespace DR.Gameplay.Combat
             {
                 m_fireStacks = 0;
                 m_usedFirePowerThisTurn = false;
+                StatusIconsManager.RemoveStatusStack(StatusIconsManager.Status.Fire, 0, true);
             }
             if (m_usedPlantPowerThisTurn)
             {
                 m_plantStacks = 0;
                 m_usedPlantPowerThisTurn = false;
+                StatusIconsManager.RemoveStatusStack(StatusIconsManager.Status.Plant, 0, true);
             }
         }
 
@@ -131,11 +142,13 @@ namespace DR.Gameplay.Combat
             if (m_plantStacks > 0)
             {
                 p_target.Dice.DiceMovementController.ApplyRoot(m_plantStacks);
+                p_target.StatusIconsManager.AddStatusStack(StatusIconsManager.Status.Root, m_plantStacks);
                 m_usedPlantPowerThisTurn = true;
             }
             if (m_dice.DiceType is EDiceType.Poison)
             {
                 p_target.Poison();
+                p_target.StatusIconsManager.AddStatusStack(StatusIconsManager.Status.Poison, 1);
             }
         }
         
@@ -147,12 +160,14 @@ namespace DR.Gameplay.Combat
             switch (m_dice.DiceType)
             {
                 case EDiceType.Fire:
-                    m_fireStacks += MOtt.GM.GetCurrentMainStateMachine<LevelGameMode>().GameplayData.FireDamagePerStack;
+                    int fireStacksToAdd = MOtt.GM.GetCurrentMainStateMachine<LevelGameMode>().GameplayData.FireDamagePerStack;
+                    m_fireStacks += fireStacksToAdd;
+                    m_statusIconsManager.AddStatusStack(StatusIconsManager.Status.Fire, fireStacksToAdd);
                     break;
                 case EDiceType.Plant:
-                    Debug.Log("previous : " + m_plantStacks);
-                    m_plantStacks += MOtt.GM.GetCurrentMainStateMachine<LevelGameMode>().GameplayData.PlantRootPerStack;
-                    Debug.Log("new : " + m_plantStacks);
+                    int plantStacksToAdd = MOtt.GM.GetCurrentMainStateMachine<LevelGameMode>().GameplayData.PlantRootPerStack;
+                    m_plantStacks += plantStacksToAdd;
+                    m_statusIconsManager.AddStatusStack(StatusIconsManager.Status.Plant, plantStacksToAdd);
                     break;
                 case EDiceType.Poison:
                     int poisonDamage = MOtt.GM.GetCurrentMainStateMachine<LevelGameMode>().GameplayData.PoisonDamage;
@@ -170,12 +185,17 @@ namespace DR.Gameplay.Combat
                     List<Dice> teamDices = m_dice.TeamIndex == 0 ? dm.FirstTeamDices : dm.SecondTeamDices;
                     foreach (Dice dice in teamDices)
                     {
-                        if(dice != m_dice)
+                        if (dice != m_dice)
+                        {
                             dice.CombatController.Heal(healAmount);
+                            dice.CombatController.OnDamageTaken?.Invoke(dice.CombatController, healAmount, EDiceType.Water);
+                        }
                     }
                     break;
                 case EDiceType.Rock:
-                    m_shield += MOtt.GM.GetCurrentMainStateMachine<LevelGameMode>().GameplayData.RockShieldPerStack;
+                    int shieldStacksToAdd = MOtt.GM.GetCurrentMainStateMachine<LevelGameMode>().GameplayData.RockShieldPerStack;
+                    m_shield += shieldStacksToAdd;
+                    m_statusIconsManager.AddStatusStack(StatusIconsManager.Status.Shield, shieldStacksToAdd);
                     break;
             }
         }
