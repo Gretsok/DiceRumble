@@ -68,6 +68,11 @@ namespace DR.Gameplay.Dices
             OnTileChanged?.Invoke(arg1, arg2);
         }
 
+        public void ResetLastTile()
+        {
+            m_lastTile = null;
+        }
+
         private void OnDestroy()
         {
             m_animationsHandler.OnRollFinished -= HandleRollFinished;

@@ -56,11 +56,11 @@ namespace MOtter.Utils
                 {
                     if (m_reverseBillboard)
                     {
-                        transform.forward = m_cameraTransform.forward;
+                        transform.forward = -m_cameraTransform.forward;
                     }
                     else
                     {
-                        transform.forward = -m_cameraTransform.forward;
+                        transform.forward = m_cameraTransform.forward;
                     }
 
                 }
@@ -68,6 +68,7 @@ namespace MOtter.Utils
                 {
                     if (m_reverseBillboard)
                     {
+                        // NE MARCHE PAS
                         transform.LookAt(-m_cameraTransform.position);
                     }
                     else
