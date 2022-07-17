@@ -53,6 +53,15 @@ public partial class @PlayerInputsActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CursorPosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""b941d18a-d85e-47f4-b8c5-c182b28f0aac"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -220,6 +229,28 @@ public partial class @PlayerInputsActions : IInputActionCollection2, IDisposable
                     ""action"": ""Submit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""77fe1984-7991-48da-9fa3-c275920ba484"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""MouseAndKeyboard"",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5c170c68-3c42-4d56-b0b5-30242a08f4d0"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""MouseAndKeyboard"",
+                    ""action"": ""CursorPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -318,6 +349,7 @@ public partial class @PlayerInputsActions : IInputActionCollection2, IDisposable
         m_MainMenu_TitleScreenPress = m_MainMenu.FindAction("TitleScreenPress", throwIfNotFound: true);
         m_MainMenu_Move = m_MainMenu.FindAction("Move", throwIfNotFound: true);
         m_MainMenu_Submit = m_MainMenu.FindAction("Submit", throwIfNotFound: true);
+        m_MainMenu_CursorPosition = m_MainMenu.FindAction("CursorPosition", throwIfNotFound: true);
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
@@ -384,6 +416,7 @@ public partial class @PlayerInputsActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_MainMenu_TitleScreenPress;
     private readonly InputAction m_MainMenu_Move;
     private readonly InputAction m_MainMenu_Submit;
+    private readonly InputAction m_MainMenu_CursorPosition;
     public struct MainMenuActions
     {
         private @PlayerInputsActions m_Wrapper;
@@ -391,6 +424,7 @@ public partial class @PlayerInputsActions : IInputActionCollection2, IDisposable
         public InputAction @TitleScreenPress => m_Wrapper.m_MainMenu_TitleScreenPress;
         public InputAction @Move => m_Wrapper.m_MainMenu_Move;
         public InputAction @Submit => m_Wrapper.m_MainMenu_Submit;
+        public InputAction @CursorPosition => m_Wrapper.m_MainMenu_CursorPosition;
         public InputActionMap Get() { return m_Wrapper.m_MainMenu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -409,6 +443,9 @@ public partial class @PlayerInputsActions : IInputActionCollection2, IDisposable
                 @Submit.started -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnSubmit;
                 @Submit.performed -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnSubmit;
                 @Submit.canceled -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnSubmit;
+                @CursorPosition.started -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnCursorPosition;
+                @CursorPosition.performed -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnCursorPosition;
+                @CursorPosition.canceled -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnCursorPosition;
             }
             m_Wrapper.m_MainMenuActionsCallbackInterface = instance;
             if (instance != null)
@@ -422,6 +459,9 @@ public partial class @PlayerInputsActions : IInputActionCollection2, IDisposable
                 @Submit.started += instance.OnSubmit;
                 @Submit.performed += instance.OnSubmit;
                 @Submit.canceled += instance.OnSubmit;
+                @CursorPosition.started += instance.OnCursorPosition;
+                @CursorPosition.performed += instance.OnCursorPosition;
+                @CursorPosition.canceled += instance.OnCursorPosition;
             }
         }
     }
@@ -490,6 +530,7 @@ public partial class @PlayerInputsActions : IInputActionCollection2, IDisposable
         void OnTitleScreenPress(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnSubmit(InputAction.CallbackContext context);
+        void OnCursorPosition(InputAction.CallbackContext context);
     }
     public interface IGameplayActions
     {
